@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight, Play, ExternalLink } from "lucide-react"
 import { projectsData as defaultProjectsData } from "@/data/projects"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -62,10 +62,10 @@ export default function ProjectsSection() {
 
   return (
     <section id="projects" ref={sectionRef} className="border-b border-neutral-200 bg-white py-16 sm:py-24 dark:border-neutral-800 dark:bg-neutral-950 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div
-          className={`flex flex-col items-start justify-between gap-6 md:flex-row md:items-end mb-10 sm:mb-12 transition-all duration-500 ease-out ${
+          className={`flex flex-col items-start justify-between gap-6 md:flex-row md:items-end transition-all duration-500 ease-out ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
@@ -82,8 +82,36 @@ export default function ProjectsSection() {
           </p>
         </div>
 
+        {/* Selected Work Video Intro Feature Card */}
+        <div className="rounded-2xl border border-neutral-200 bg-neutral-950 text-white dark:border-neutral-800 overflow-hidden relative group">
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
+            <div className="lg:col-span-7 p-6 sm:p-10 space-y-4 z-10">
+              <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-neutral-400 border border-neutral-800 bg-neutral-900/80 px-2.5 py-1 rounded">
+                <Play className="h-3 w-3 text-emerald-400 fill-emerald-400" /> Visual Engineering Intro (8s)
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+                Design &rarr; Architecture &rarr; Delivery
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-xl font-sans">
+                A glimpse into how Olinethra engineers production web applications, custom CMS integrations, and modern TypeScript software systems with sub-second performance.
+              </p>
+            </div>
+            <div className="lg:col-span-5 aspect-video sm:aspect-16/10 relative overflow-hidden bg-neutral-900 border-t lg:border-t-0 lg:border-l border-neutral-800">
+              <video
+                src="https://assets.mixkit.co/videos/preview/mixkit-code-animation-web-development-41656-large.mp4"
+                poster="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800"
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80"
+              />
+            </div>
+          </div>
+        </div>
+
         {/* Category Filters */}
-        <div className="flex flex-wrap items-center gap-2 mb-8 sm:mb-10 pb-4 border-b border-neutral-100 dark:border-neutral-800 overflow-x-auto">
+        <div className="flex flex-wrap items-center gap-2 pb-4 border-b border-neutral-100 dark:border-neutral-800 overflow-x-auto">
           {categories.map((cat) => (
             <button
               key={cat}
@@ -109,7 +137,7 @@ export default function ProjectsSection() {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              {/* Black & White Visual Code Placeholder Card with Zoom Effect */}
+              {/* Thumbnail / Visual Showcase */}
               <div className="relative aspect-16/10 w-full overflow-hidden border-b border-neutral-200 bg-neutral-950 p-5 text-neutral-200 dark:border-neutral-800">
                 <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-950 to-black transition-transform duration-500 ease-out group-hover:scale-105" />
                 <div className="relative z-10 flex items-center justify-between font-mono text-[10px] text-neutral-500 uppercase tracking-widest border-b border-neutral-800 pb-2">
@@ -158,15 +186,19 @@ export default function ProjectsSection() {
                   </div>
                 </div>
 
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setActiveProject(project)}
-                  className="w-full justify-between border-neutral-300 font-medium dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 group-hover:border-neutral-400"
-                >
-                  <span>View Case Details</span>
-                  <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </Button>
+                <div className="flex items-center gap-2">
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className="flex-1 justify-between border-neutral-300 font-medium dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                  >
+                    <Link href={`/projects/${(project as any).slug || project.id}`}>
+                      <span>View Case Study</span>
+                      <ArrowUpRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
               </div>
             </div>
           ))}
@@ -175,68 +207,13 @@ export default function ProjectsSection() {
         {/* View All Projects CTA */}
         <div className="mt-14 text-center">
           <Button asChild variant="outline" className="rounded-lg px-6 py-5 font-medium border-neutral-300 dark:border-neutral-700">
-            <Link href="/projects" className="flex items-center gap-2">
-              Browse All Projects & Architecture Specifications
+            <Link href="/projects" className="flex items-center gap-2 font-mono text-xs">
+              Browse All Portfolio Projects &amp; Specifications
               <ArrowUpRight className="h-4 w-4" />
             </Link>
           </Button>
         </div>
       </div>
-
-      {/* Project Detail Modal */}
-      {activeProject && (
-        <Dialog open={!!activeProject} onOpenChange={() => setActiveProject(null)}>
-          <DialogContent className="max-w-2xl w-[92vw] sm:w-full p-5 sm:p-7 max-h-[88vh] overflow-y-auto">
-            <DialogHeader>
-              <div className="flex items-center gap-2 font-mono text-xs text-neutral-500 uppercase">
-                <span>{activeProject.category}</span>
-                <span>•</span>
-                <span>{activeProject.year}</span>
-              </div>
-              <DialogTitle className="text-xl sm:text-2xl font-bold mt-1">
-                {activeProject.title}
-              </DialogTitle>
-              <DialogDescription className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
-                Client: {activeProject.client}
-              </DialogDescription>
-            </DialogHeader>
-
-            <div className="space-y-6 my-2">
-              <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
-                {activeProject.description}
-              </p>
-
-              {/* Metrics Grid */}
-              {activeProject.metrics && activeProject.metrics.length > 0 && (
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-y border-neutral-200 py-4 dark:border-neutral-800">
-                  {activeProject.metrics.map((m: any) => (
-                    <div key={m.label} className="text-center bg-neutral-50 dark:bg-neutral-900 p-2.5 rounded-lg sm:bg-transparent dark:sm:bg-transparent">
-                      <div className="font-mono text-lg sm:text-xl font-bold text-neutral-950 dark:text-neutral-50">
-                        {m.value}
-                      </div>
-                      <div className="text-xs text-neutral-500 font-mono mt-0.5">
-                        {m.label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* Tech Stack */}
-              <div>
-                <h4 className="font-mono text-xs uppercase tracking-wider text-neutral-500 mb-2">Technologies Used</h4>
-                <div className="flex flex-wrap gap-2">
-                  {activeProject.technologies?.map((tech: any) => (
-                    <Badge key={tech} variant="monochrome">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </DialogContent>
-        </Dialog>
-      )}
     </section>
   )
 }

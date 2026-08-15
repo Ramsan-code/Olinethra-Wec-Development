@@ -14,6 +14,7 @@ import {
   Bot,
   FileText,
   MessageSquare,
+  Image as ImageIcon,
   Settings,
   LogOut,
   ExternalLink,
@@ -34,15 +35,16 @@ interface AdminUser {
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/projects", label: "Portfolio / Work", icon: FolderGit2 },
   { href: "/admin/team", label: "Team Members", icon: Users },
+  { href: "/admin/services", label: "Services", icon: Layers },
   { href: "/admin/internships", label: "Internships", icon: GraduationCap },
   { href: "/admin/hiring", label: "Hiring / Jobs", icon: Briefcase },
-  { href: "/admin/projects", label: "Projects", icon: FolderGit2 },
-  { href: "/admin/services", label: "Services", icon: Layers },
   { href: "/admin/faqs", label: "FAQ Manager", icon: HelpCircle },
   { href: "/admin/chatbot", label: "Chatbot Knowledge", icon: Bot },
   { href: "/admin/applications", label: "Applications", icon: FileText },
   { href: "/admin/inquiries", label: "Project Inquiries", icon: MessageSquare },
+  { href: "/admin/media", label: "Media Library", icon: ImageIcon },
   { href: "/admin/settings", label: "Site Settings", icon: Settings },
 ]
 

@@ -62,15 +62,22 @@ export interface JobItem {
 export interface ProjectCMSItem {
   id: string
   title: string
+  slug?: string
   description: string
   thumbnail: string
+  heroImage?: string
   gallery: string[]
+  videoUrl?: string
+  videoPoster?: string
   technologies: string[]
   category: string
   client: string
   projectUrl: string
   githubUrl?: string
   caseStudy: string
+  challenges?: string
+  solution?: string
+  results?: string
   isFeatured: boolean
   displayOrder: number
   status: "Published" | "Draft"
