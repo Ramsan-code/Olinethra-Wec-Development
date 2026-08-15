@@ -145,9 +145,28 @@ export interface ProjectInquiryItem {
   company: string
   projectType: string
   budget?: string
+  priority?: "HIGH" | "MEDIUM" | "LOW"
   message: string
   date: string
-  status: "New" | "In Progress" | "Closed"
+  status: "New" | "Contacted" | "Discussion" | "Proposal" | "Won" | "Lost"
+}
+
+export interface NotificationItem {
+  id: string
+  type: "inquiry" | "application" | "status" | "expiry"
+  title: string
+  message: string
+  date: string
+  read: boolean
+  link?: string
+}
+
+export interface ActivityLogItem {
+  id: string
+  user: string
+  action: string
+  entity: string
+  date: string
 }
 
 export interface CmsStore {
@@ -161,6 +180,8 @@ export interface CmsStore {
   siteSettings: SiteSettings
   applications: ApplicationItem[]
   inquiries: ProjectInquiryItem[]
+  notifications?: NotificationItem[]
+  activityLog?: ActivityLogItem[]
 }
 
 const DATA_FILE_PATH = path.join(process.cwd(), "data", "cmsData.json")
@@ -369,6 +390,7 @@ function getSeedData(): CmsStore {
         company: "Finovate Solutions",
         projectType: "Web Application",
         budget: "$20,000 - $40,000",
+        priority: "HIGH",
         message: "We need a real-time analytics dashboard built with Next.js and PostgreSQL.",
         date: "2026-08-15",
         status: "New",
@@ -380,9 +402,41 @@ function getSeedData(): CmsStore {
         company: "Aura Fashion",
         projectType: "E-Commerce Store",
         budget: "$15,000 - $25,000",
+        priority: "HIGH",
         message: "Looking for a headless Shopify storefront with Stripe integration.",
         date: "2026-08-13",
-        status: "In Progress",
+        status: "Discussion",
+      },
+    ],
+
+    notifications: [
+      {
+        id: "notif-1",
+        type: "inquiry",
+        title: "New Project Inquiry Received",
+        message: "Marcus Vance submitted a project inquiry for Web Application Development.",
+        date: "2026-08-15",
+        read: false,
+        link: "/admin/inquiries",
+      },
+      {
+        id: "notif-2",
+        type: "application",
+        title: "New Internship Application",
+        message: "Alex Rivera applied for Full Stack Web Development Intern position.",
+        date: "2026-08-14",
+        read: true,
+        link: "/admin/applications",
+      },
+    ],
+
+    activityLog: [
+      {
+        id: "act-1",
+        user: "System",
+        action: "Initialized CMS Store",
+        entity: "System",
+        date: new Date().toISOString(),
       },
     ],
   }
@@ -390,14 +444,44 @@ function getSeedData(): CmsStore {
 
 export function getCmsData(): CmsStore {
   try {
+    let data: CmsStore
     if (!fs.existsSync(DATA_FILE_PATH)) {
-      const seed = getSeedData()
+      data = getSeedData()
       fs.mkdirSync(path.dirname(DATA_FILE_PATH), { recursive: true })
-      fs.writeFileSync(DATA_FILE_PATH, JSON.stringify(seed, null, 2), "utf-8")
-      return seed
+      fs.writeFileSync(DATA_FILE_PATH, JSON.stringify(data, null, 2), "utf-8")
+    } else {
+      const fileContent = fs.readFileSync(DATA_FILE_PATH, "utf-8")
+      data = JSON.parse(fileContent) as CmsStore
     }
-    const fileContent = fs.readFileSync(DATA_FILE_PATH, "utf-8")
-    return JSON.parse(fileContent) as CmsStore
+
+    if (!data.notifications) data.notifications = []
+    if (!data.activityLog) data.activityLog = []
+
+    // Automatic Internship & Job Expiry Automation
+    const today = new Date().toISOString().split("T")[0]
+    let modified = false
+
+    data.internships = data.internships.map((item) => {
+      if (item.deadline && item.deadline < today && item.status === "Open") {
+        modified = true
+        return { ...item, status: "Closed" as const }
+      }
+      return item
+    })
+
+    data.jobs = data.jobs.map((item) => {
+      if (item.deadline && item.deadline < today && item.status === "Open") {
+        modified = true
+        return { ...item, status: "Closed" as const }
+      }
+      return item
+    })
+
+    if (modified) {
+      saveCmsData(data)
+    }
+
+    return data
   } catch (error) {
     console.error("Error reading CMS data, returning seed:", error)
     return getSeedData()

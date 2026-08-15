@@ -12,14 +12,15 @@ import {
   HelpCircle,
   Bot,
   MessageSquare,
-  FileText,
   ArrowUpRight,
   Plus,
   Activity,
+  Bell,
+  Sparkles,
   CheckCircle2,
-  Clock,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 import { CmsStore } from "@/lib/cms"
 
 export default function AdminDashboardPage() {
@@ -64,9 +65,11 @@ export default function AdminDashboardPage() {
     { label: "Published Projects", value: publishedProjectsCount, total: data.projects.length, icon: FolderGit2, href: "/admin/projects" },
     { label: "Active Services", value: activeServicesCount, total: data.services.length, icon: Layers, href: "/admin/services" },
     { label: "FAQ Entries", value: data.faqs.length, total: data.faqs.length, icon: HelpCircle, href: "/admin/faqs" },
-    { label: "Chatbot QA Items", value: data.chatbotKnowledge.length, total: data.chatbotKnowledge.length, icon: Bot, href: "/admin/chatbot" },
+    { label: "Chatbot Knowledge", value: data.chatbotKnowledge.length, total: data.chatbotKnowledge.length, icon: Bot, href: "/admin/chatbot" },
     { label: "Project Inquiries", value: newInquiriesCount, total: data.inquiries.length, icon: MessageSquare, href: "/admin/inquiries" },
   ]
+
+  const activityList = data.activityLog || []
 
   return (
     <AdminLayout>
@@ -75,7 +78,7 @@ export default function AdminDashboardPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-200 pb-6 dark:border-neutral-800">
           <div>
             <span className="font-mono text-xs font-semibold uppercase tracking-widest text-neutral-500">
-              [ SYSTEM OVERVIEW ]
+              [ SYSTEM OVERVIEW &amp; AUTOMATION ]
             </span>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 dark:text-neutral-50">
               Dashboard Overview
@@ -135,7 +138,7 @@ export default function AdminDashboardPage() {
             <div className="flex items-center justify-between border-b border-neutral-100 pb-3 dark:border-neutral-800">
               <h2 className="font-mono text-xs uppercase font-bold text-neutral-950 dark:text-neutral-50 flex items-center gap-2">
                 <MessageSquare className="h-4 w-4" />
-                <span>Recent Contact & Project Inquiries</span>
+                <span>Recent Lead Inquiries</span>
               </h2>
               <Link href="/admin/inquiries" className="text-xs font-mono text-neutral-500 hover:underline">
                 View All ({data.inquiries.length}) →
@@ -143,7 +146,7 @@ export default function AdminDashboardPage() {
             </div>
 
             <div className="space-y-3">
-              {data.inquiries.slice(0, 4).map((inq) => (
+              {data.inquiries.slice(0, 5).map((inq) => (
                 <div
                   key={inq.id}
                   className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 rounded-lg border border-neutral-100 bg-neutral-50 p-3.5 dark:border-neutral-800 dark:bg-neutral-950"
@@ -152,6 +155,11 @@ export default function AdminDashboardPage() {
                     <div className="flex items-center gap-2">
                       <span className="font-bold text-xs text-neutral-950 dark:text-neutral-50">{inq.name}</span>
                       <span className="text-[10px] font-mono text-neutral-400">({inq.company})</span>
+                      {inq.priority === "HIGH" && (
+                        <span className="rounded bg-emerald-500/10 px-1.5 py-0.5 font-mono text-[9px] font-bold uppercase text-emerald-600 border border-emerald-500/30">
+                          HIGH PRIORITY
+                        </span>
+                      )}
                     </div>
                     <p className="text-xs text-neutral-600 dark:text-neutral-400 line-clamp-1">{inq.message}</p>
                   </div>
@@ -172,35 +180,34 @@ export default function AdminDashboardPage() {
             </div>
           </div>
 
-          {/* Activity & System Status (5 columns) */}
+          {/* Activity Log & System Status (5 columns) */}
           <div className="lg:col-span-5 rounded-xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900 space-y-4">
             <div className="flex items-center justify-between border-b border-neutral-100 pb-3 dark:border-neutral-800">
               <h2 className="font-mono text-xs uppercase font-bold text-neutral-950 dark:text-neutral-50 flex items-center gap-2">
                 <Activity className="h-4 w-4" />
-                <span>System & AI Chatbot Status</span>
+                <span>Automated Activity Log</span>
               </h2>
             </div>
 
-            <div className="space-y-3 font-mono text-xs">
-              <div className="flex items-center justify-between p-3 rounded-lg border border-neutral-100 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
-                <span className="text-neutral-600 dark:text-neutral-400">AI Chatbot Knowledge Engine</span>
-                <span className="flex items-center gap-1.5 font-bold text-emerald-600">
-                  <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                  Active & Synced
-                </span>
-              </div>
-
-              <div className="flex items-center justify-between p-3 rounded-lg border border-neutral-100 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
-                <span className="text-neutral-600 dark:text-neutral-400">Pending Applications</span>
-                <span className="font-bold text-neutral-950 dark:text-neutral-50">{newApplicationsCount} New</span>
-              </div>
-
-              <div className="flex items-center justify-between p-3 rounded-lg border border-neutral-100 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
-                <span className="text-neutral-600 dark:text-neutral-400">Open Career Positions</span>
-                <span className="font-bold text-neutral-950 dark:text-neutral-50">
-                  {activeInternshipsCount + openJobsCount} Total
-                </span>
-              </div>
+            <div className="space-y-3 font-mono text-xs max-h-72 overflow-y-auto pr-1">
+              {activityList.length === 0 ? (
+                <p className="text-neutral-400 text-center py-4">No recent activity logged.</p>
+              ) : (
+                activityList.slice(0, 8).map((act) => (
+                  <div
+                    key={act.id}
+                    className="flex flex-col gap-0.5 p-2.5 rounded-lg border border-neutral-100 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950 text-[11px]"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-neutral-900 dark:text-neutral-100">{act.user}</span>
+                      <span className="text-[9px] text-neutral-400">
+                        {new Date(act.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      </span>
+                    </div>
+                    <p className="text-neutral-600 dark:text-neutral-400">{act.action}</p>
+                  </div>
+                ))
+              )}
             </div>
 
             <div className="pt-2">

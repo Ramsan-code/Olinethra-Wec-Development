@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import AdminLayout from "@/components/admin/AdminLayout"
-import { MessageSquare, Search, Mail, Building, Trash2 } from "lucide-react"
+import { MessageSquare, Search, Mail, Building, Trash2, Flame } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { ProjectInquiryItem, CmsStore } from "@/lib/cms"
@@ -80,7 +80,7 @@ export default function InquiriesAdminPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-200 pb-6 dark:border-neutral-800">
           <div>
             <span className="font-mono text-xs font-semibold uppercase tracking-widest text-neutral-500">
-              [ CLIENT LEAD INBOX ]
+              [ CLIENT LEAD MANAGEMENT &amp; CRM ]
             </span>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 dark:text-neutral-50">
               Contact &amp; Project Inquiries
@@ -103,8 +103,8 @@ export default function InquiriesAdminPage() {
             />
           </div>
 
-          <div className="flex items-center gap-1.5 w-full sm:w-auto">
-            {["All", "New", "In Progress", "Closed"].map((st) => (
+          <div className="flex flex-wrap items-center gap-1.5 w-full sm:w-auto">
+            {["All", "New", "Contacted", "Discussion", "Proposal", "Won", "Lost"].map((st) => (
               <button
                 key={st}
                 type="button"
@@ -141,6 +141,11 @@ export default function InquiriesAdminPage() {
                         <Building className="h-3 w-3" /> {inq.company}
                       </span>
                     )}
+                    {inq.priority === "HIGH" && (
+                      <span className="flex items-center gap-1 rounded bg-emerald-500/10 px-2 py-0.5 font-mono text-[10px] font-bold text-emerald-600 border border-emerald-500/30">
+                        <Flame className="h-3 w-3" /> HIGH PRIORITY
+                      </span>
+                    )}
                   </div>
 
                   <p className="text-xs text-neutral-700 dark:text-neutral-300 leading-relaxed font-sans bg-neutral-50 dark:bg-neutral-950 p-3 rounded-lg border border-neutral-100 dark:border-neutral-850">
@@ -171,8 +176,11 @@ export default function InquiriesAdminPage() {
                     className="h-8 rounded-lg border border-neutral-300 bg-white px-2 font-mono text-xs dark:border-neutral-700 dark:bg-neutral-950"
                   >
                     <option value="New">Status: New</option>
-                    <option value="In Progress">Status: In Progress</option>
-                    <option value="Closed">Status: Closed</option>
+                    <option value="Contacted">Status: Contacted</option>
+                    <option value="Discussion">Status: Discussion</option>
+                    <option value="Proposal">Status: Proposal</option>
+                    <option value="Won">Status: Won</option>
+                    <option value="Lost">Status: Lost</option>
                   </select>
 
                   <Button
