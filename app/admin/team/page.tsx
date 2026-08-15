@@ -313,6 +313,21 @@ export default function TeamAdminPage() {
                   />
                 </div>
 
+                <div className="space-y-1">
+                  <Label className="text-xs font-mono">Skills (comma-separated)</Label>
+                  <Input
+                    value={Array.isArray(editingItem.skills) ? editingItem.skills.join(", ") : editingItem.skills || ""}
+                    onChange={(e) =>
+                      setEditingItem({
+                        ...editingItem,
+                        skills: e.target.value.split(",").map((s) => s.trim()).filter(Boolean),
+                      })
+                    }
+                    placeholder="Next.js, TypeScript, Node.js, Tailwind CSS"
+                    className="text-xs font-mono"
+                  />
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <Label className="text-xs font-mono">LinkedIn URL</Label>
@@ -330,6 +345,26 @@ export default function TeamAdminPage() {
                       value={editingItem.github || ""}
                       onChange={(e) => setEditingItem({ ...editingItem, github: e.target.value })}
                       placeholder="https://github.com/..."
+                      className="text-xs font-mono"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <Label className="text-xs font-mono">Portfolio URL</Label>
+                    <Input
+                      value={editingItem.portfolio || ""}
+                      onChange={(e) => setEditingItem({ ...editingItem, portfolio: e.target.value })}
+                      placeholder="https://example.com"
+                      className="text-xs font-mono"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <Label className="text-xs font-mono">Contact Email</Label>
+                    <Input
+                      value={editingItem.email || ""}
+                      onChange={(e) => setEditingItem({ ...editingItem, email: e.target.value })}
+                      placeholder="dev@olinethra.com"
                       className="text-xs font-mono"
                     />
                   </div>

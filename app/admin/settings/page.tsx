@@ -211,29 +211,62 @@ export default function SettingsAdminPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-1">
-                <Label className="text-xs font-mono">GitHub URL</Label>
+                <Label className="text-xs font-mono">LinkedIn URL</Label>
                 <Input
-                  value={settings.githubUrl}
-                  onChange={(e) => setSettings({ ...settings, githubUrl: e.target.value })}
+                  value={settings.linkedinUrl || ""}
+                  onChange={(e) => setSettings({ ...settings, linkedinUrl: e.target.value })}
                   className="text-xs font-mono"
+                  placeholder="https://linkedin.com/company/..."
                 />
               </div>
 
               <div className="space-y-1">
-                <Label className="text-xs font-mono">LinkedIn URL</Label>
+                <Label className="text-xs font-mono">GitHub URL</Label>
                 <Input
-                  value={settings.linkedinUrl}
-                  onChange={(e) => setSettings({ ...settings, linkedinUrl: e.target.value })}
+                  value={settings.githubUrl || ""}
+                  onChange={(e) => setSettings({ ...settings, githubUrl: e.target.value })}
                   className="text-xs font-mono"
+                  placeholder="https://github.com/..."
                 />
               </div>
 
               <div className="space-y-1">
                 <Label className="text-xs font-mono">Twitter / X URL</Label>
                 <Input
-                  value={settings.twitterUrl}
+                  value={settings.twitterUrl || ""}
                   onChange={(e) => setSettings({ ...settings, twitterUrl: e.target.value })}
                   className="text-xs font-mono"
+                  placeholder="https://x.com/..."
+                />
+              </div>
+
+              <div className="space-y-1">
+                <Label className="text-xs font-mono">Facebook URL</Label>
+                <Input
+                  value={settings.facebookUrl || ""}
+                  onChange={(e) => setSettings({ ...settings, facebookUrl: e.target.value })}
+                  className="text-xs font-mono"
+                  placeholder="https://facebook.com/..."
+                />
+              </div>
+
+              <div className="space-y-1">
+                <Label className="text-xs font-mono">Instagram URL</Label>
+                <Input
+                  value={settings.instagramUrl || ""}
+                  onChange={(e) => setSettings({ ...settings, instagramUrl: e.target.value })}
+                  className="text-xs font-mono"
+                  placeholder="https://instagram.com/..."
+                />
+              </div>
+
+              <div className="space-y-1">
+                <Label className="text-xs font-mono">YouTube URL</Label>
+                <Input
+                  value={settings.youtubeUrl || ""}
+                  onChange={(e) => setSettings({ ...settings, youtubeUrl: e.target.value })}
+                  className="text-xs font-mono"
+                  placeholder="https://youtube.com/@..."
                 />
               </div>
             </div>

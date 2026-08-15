@@ -120,6 +120,9 @@ export interface SiteSettings {
   githubUrl: string
   linkedinUrl: string
   twitterUrl: string
+  facebookUrl?: string
+  instagramUrl?: string
+  youtubeUrl?: string
 }
 
 export interface ApplicationItem {
@@ -170,11 +173,11 @@ function getSeedData(): CmsStore {
       role: t.role,
       department: t.department || "Engineering",
       bio: t.bio,
-      photoUrl: t.photo || t.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400",
+      photoUrl: t.photoUrl || t.photo || t.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600",
       skills: t.skills || ["TypeScript", "Next.js"],
-      linkedin: t.socialLinks?.linkedin || t.linkedin,
-      github: t.socialLinks?.github || t.github,
-      email: t.email,
+      linkedin: t.linkedinUrl || t.socialLinks?.linkedin || t.linkedin || "https://linkedin.com",
+      github: t.githubUrl || t.socialLinks?.github || t.github || "https://github.com",
+      email: t.email || "dev@olinethra.com",
       displayOrder: idx + 1,
       status: "Active",
     })),
@@ -326,6 +329,9 @@ function getSeedData(): CmsStore {
       githubUrl: "https://github.com/olinethra",
       linkedinUrl: "https://linkedin.com/company/olinethra",
       twitterUrl: "https://twitter.com/olinethra",
+      facebookUrl: "https://facebook.com/olinethra",
+      instagramUrl: "https://instagram.com/olinethra",
+      youtubeUrl: "https://youtube.com/@olinethra",
     },
 
     applications: [

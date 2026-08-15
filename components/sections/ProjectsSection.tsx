@@ -21,6 +21,26 @@ export default function ProjectsSection() {
   const [selectedCategory, setSelectedCategory] = React.useState("All")
   const [activeProject, setActiveProject] = React.useState<any | null>(null)
   const [cmsProjects, setCmsProjects] = React.useState<ProjectCMSItem[]>([])
+  const sectionRef = React.useRef<HTMLDivElement>(null)
+  const [isVisible, setIsVisible] = React.useState(false)
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
 
   React.useEffect(() => {
     fetch("/api/admin/cms")
@@ -41,16 +61,20 @@ export default function ProjectsSection() {
     : allProjects.filter((p) => p.category === selectedCategory)
 
   return (
-    <section id="projects" className="border-b border-neutral-200 bg-white py-16 sm:py-24 dark:border-neutral-800 dark:bg-neutral-950">
+    <section id="projects" ref={sectionRef} className="border-b border-neutral-200 bg-white py-16 sm:py-24 dark:border-neutral-800 dark:bg-neutral-950 overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end mb-10 sm:mb-12">
+        <div
+          className={`flex flex-col items-start justify-between gap-6 md:flex-row md:items-end mb-10 sm:mb-12 transition-all duration-500 ease-out ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           <div>
             <span className="font-mono text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
               [ FEATURED CASE STUDIES ]
             </span>
             <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-neutral-950 dark:text-neutral-50">
-              Selected Software & Web Work
+              Selected Software &amp; Web Work
             </h2>
           </div>
           <p className="max-w-md text-sm text-neutral-600 dark:text-neutral-400">
@@ -77,26 +101,30 @@ export default function ProjectsSection() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {filteredProjects.map((project) => (
+          {filteredProjects.map((project, index) => (
             <div
               key={project.id}
-              className="group flex flex-col justify-between overflow-hidden rounded-xl border border-neutral-200 bg-white transition-all duration-200 hover:border-neutral-400 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-neutral-700"
+              style={{ transitionDelay: isVisible ? `${index * 100}ms` : "0ms" }}
+              className={`group flex flex-col justify-between overflow-hidden rounded-xl border border-neutral-200 bg-white transition-all duration-300 ease-out hover:border-neutral-400 hover:shadow-lg hover:-translate-y-1.5 dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-neutral-700 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
             >
-              {/* Black & White Visual Code Placeholder Card */}
+              {/* Black & White Visual Code Placeholder Card with Zoom Effect */}
               <div className="relative aspect-16/10 w-full overflow-hidden border-b border-neutral-200 bg-neutral-950 p-5 text-neutral-200 dark:border-neutral-800">
-                <div className="flex items-center justify-between font-mono text-[10px] text-neutral-500 uppercase tracking-widest border-b border-neutral-800 pb-2">
+                <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-950 to-black transition-transform duration-500 ease-out group-hover:scale-105" />
+                <div className="relative z-10 flex items-center justify-between font-mono text-[10px] text-neutral-500 uppercase tracking-widest border-b border-neutral-800 pb-2">
                   <span>{(project as any).imagePlaceholder?.title || project.title}</span>
                   <span>{(project as any).year || "2026"}</span>
                 </div>
-                <div className="mt-4 space-y-2">
+                <div className="relative z-10 mt-4 space-y-2">
                   <p className="text-xs font-mono text-neutral-300 font-medium">
                     {(project as any).imagePlaceholder?.subtitle || project.client || "Web Platform"}
                   </p>
-                  <div className="rounded border border-neutral-800 bg-neutral-900/90 p-2.5 font-mono text-[11px] text-neutral-400 overflow-x-auto">
+                  <div className="rounded border border-neutral-800 bg-neutral-900/90 p-2.5 font-mono text-[11px] text-neutral-400 overflow-x-auto transition-colors duration-300 group-hover:border-neutral-700">
                     <code>{(project as any).imagePlaceholder?.codeSnippet || `// Tech Stack: ${project.technologies?.slice(0, 3).join(", ")}`}</code>
                   </div>
                 </div>
-                <div className="absolute bottom-3 right-3 flex gap-1">
+                <div className="absolute bottom-3 right-3 z-10 flex gap-1">
                   <Badge variant="monochrome" className="text-[9px] bg-neutral-900 text-neutral-300">
                     {project.category}
                   </Badge>
@@ -110,7 +138,7 @@ export default function ProjectsSection() {
                     <span className="font-mono text-xs text-neutral-500">{project.client}</span>
                     <span className="font-mono text-xs text-neutral-400">{(project as any).year || "2026"}</span>
                   </div>
-                  <h3 className="text-xl font-bold text-neutral-950 dark:text-neutral-50 mb-2 group-hover:text-neutral-900">
+                  <h3 className="text-xl font-bold text-neutral-950 dark:text-neutral-50 mb-2 transition-transform duration-200 ease-out group-hover:translate-x-1 group-hover:text-neutral-900 dark:group-hover:text-white">
                     {project.title}
                   </h3>
                   <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 mb-6 line-clamp-2">
@@ -119,7 +147,7 @@ export default function ProjectsSection() {
 
                   {/* Tech Stack Pills */}
                   <div className="flex flex-wrap gap-1.5 mb-6">
-                    {project.technologies.slice(0, 4).map((tech) => (
+                    {project.technologies.slice(0, 4).map((tech: any) => (
                       <span
                         key={tech}
                         className="rounded border border-neutral-200 bg-neutral-50 px-2 py-0.5 font-mono text-[11px] text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300"
@@ -134,10 +162,10 @@ export default function ProjectsSection() {
                   variant="outline"
                   size="sm"
                   onClick={() => setActiveProject(project)}
-                  className="w-full justify-between border-neutral-300 font-medium dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                  className="w-full justify-between border-neutral-300 font-medium dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 group-hover:border-neutral-400"
                 >
                   <span>View Case Details</span>
-                  <ArrowUpRight className="h-4 w-4" />
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </Button>
               </div>
             </div>
