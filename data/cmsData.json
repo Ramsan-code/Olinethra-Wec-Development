@@ -1,0 +1,820 @@
+{
+  "team": [
+    {
+      "id": "alexander-wright",
+      "name": "Alexander Wright",
+      "role": "Founder & CEO",
+      "department": "Engineering",
+      "bio": "Systems architect and technology strategist with over 10 years of experience scaling web applications and digital infrastructure.",
+      "photoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400",
+      "skills": [
+        "System Architecture",
+        "Product Strategy",
+        "Next.js",
+        "Engineering Leadership"
+      ],
+      "displayOrder": 1,
+      "status": "Active"
+    },
+    {
+      "id": "elena-rostova",
+      "name": "Elena Rostova",
+      "role": "Lead Full-Stack Developer",
+      "department": "Engineering",
+      "bio": "Full-stack engineer specialized in distributed systems, high-performance Node.js APIs, and modern React architectures.",
+      "photoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400",
+      "skills": [
+        "Next.js",
+        "TypeScript",
+        "Node.js",
+        "PostgreSQL",
+        "Docker"
+      ],
+      "displayOrder": 2,
+      "status": "Active"
+    },
+    {
+      "id": "marcus-vance",
+      "name": "Marcus Vance",
+      "role": "UI/UX Design Director",
+      "department": "Engineering",
+      "bio": "Product designer focused on minimal design systems, typography hierarchy, accessibility, and high-converting user interfaces.",
+      "photoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400",
+      "skills": [
+        "Design Systems",
+        "Figma",
+        "User Research",
+        "Wireframing",
+        "CSS Architecture"
+      ],
+      "displayOrder": 3,
+      "status": "Active"
+    },
+    {
+      "id": "sophia-chen",
+      "name": "Sophia Chen",
+      "role": "Frontend Developer",
+      "department": "Engineering",
+      "bio": "Frontend craftsman passionate about micro-interactions, responsive CSS layouts, performance optimization, and Web Vitals.",
+      "photoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400",
+      "skills": [
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "shadcn/ui",
+        "Web Vitals"
+      ],
+      "displayOrder": 4,
+      "status": "Active"
+    },
+    {
+      "id": "david-miller",
+      "name": "David Miller",
+      "role": "Backend & Database Engineer",
+      "department": "Engineering",
+      "bio": "Backend developer specializing in database query optimization, security protocols, cloud microservices, and serverless APIs.",
+      "photoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400",
+      "skills": [
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "PostgreSQL",
+        "REST & GraphQL"
+      ],
+      "displayOrder": 5,
+      "status": "Active"
+    },
+    {
+      "id": "aria-patel",
+      "name": "Aria Patel",
+      "role": "QA & Reliability Engineer",
+      "department": "Engineering",
+      "bio": "Quality assurance engineer dedicated to end-to-end automated testing, accessibility standards validation, and stress testing.",
+      "photoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400",
+      "skills": [
+        "Automated Testing",
+        "Playwright",
+        "Jest",
+        "Accessibility (WCAG)",
+        "CI/CD"
+      ],
+      "displayOrder": 6,
+      "status": "Active"
+    }
+  ],
+  "internships": [
+    {
+      "id": "internships-1786825130170",
+      "title": "QA Automation Intern",
+      "department": "Engineering",
+      "description": "Testing CRUD functionalities for Internship Management.",
+      "responsibilities": [
+        "Participate in daily agile standups.",
+        "Develop Next.js components."
+      ],
+      "requirements": [
+        "Familiarity with React and TypeScript.",
+        "Strong problem-solving skills."
+      ],
+      "skills": [
+        "React",
+        "TypeScript",
+        "Tailwind CSS"
+      ],
+      "duration": "3 Months",
+      "location": "San Francisco, CA / Remote",
+      "workType": "Remote",
+      "deadline": "2026-10-30",
+      "vacancies": 2,
+      "status": "Open",
+      "applicationLink": "mailto:careers@olinethra.com?subject=Internship%20Application",
+      "isFeatured": true
+    },
+    {
+      "id": "frontend-developer-intern",
+      "title": "Frontend Developer Intern",
+      "department": "Engineering",
+      "description": "As a Frontend Developer Intern at Olinethra, you will participate directly in active client web projects. You'll craft accessible UI components, implement responsive web design patterns, and learn industry standards in web performance.",
+      "responsibilities": [
+        "Build modular React components following our design system rules",
+        "Translate Figma wireframes into clean, semantic HTML/CSS code",
+        "Collaborate with backend engineers to integrate API endpoints",
+        "Participate in code reviews and performance profiling"
+      ],
+      "requirements": [
+        "Solid understanding of JavaScript (ES6+), React fundamentals, and CSS grid/flexbox",
+        "Familiarity with TypeScript and Tailwind CSS",
+        "Understanding of Git branching workflows",
+        "Eagerness to learn production Next.js App Router patterns"
+      ],
+      "skills": [
+        "React",
+        "TypeScript"
+      ],
+      "duration": "3 - 6 Months",
+      "location": "Remote",
+      "workType": "Internship",
+      "deadline": "2026-10-30",
+      "vacancies": 2,
+      "status": "Open",
+      "applicationLink": "careers@olinethra.com",
+      "isFeatured": true
+    },
+    {
+      "id": "backend-developer-intern",
+      "title": "Backend Developer Intern",
+      "department": "Engineering",
+      "description": "Join our core engineering team to develop scale-ready backend API services using Node.js, Express, PostgreSQL, and MongoDB. Learn database optimization, authentication flows, and automated testing.",
+      "responsibilities": [
+        "Develop and document clean REST and GraphQL API routes",
+        "Write efficient database queries in PostgreSQL and MongoDB",
+        "Assist in writing unit and integration tests",
+        "Help optimize server response times and database indexing"
+      ],
+      "requirements": [
+        "Understanding of Node.js asynchronous programming and API concepts",
+        "Basic experience with SQL (PostgreSQL) or MongoDB",
+        "Familiarity with REST architecture principles",
+        "Knowledge of Git version control"
+      ],
+      "skills": [
+        "React",
+        "TypeScript"
+      ],
+      "duration": "3 - 6 Months",
+      "location": "Remote",
+      "workType": "Internship",
+      "deadline": "2026-10-30",
+      "vacancies": 2,
+      "status": "Open",
+      "applicationLink": "careers@olinethra.com",
+      "isFeatured": true
+    },
+    {
+      "id": "ui-ux-design-intern",
+      "title": "UI/UX Design Intern",
+      "department": "Design",
+      "description": "Collaborate with our design director to create elegant digital experiences. You will design wireframes, high-fidelity mockups, design token systems, and interactive prototypes for client projects.",
+      "responsibilities": [
+        "Create high-fidelity UI layouts in Figma adhering to strict typography grid standards",
+        "Build reusable component libraries and design tokens",
+        "Conduct user workflow research and competitive UI analyses",
+        "Assist frontend developers during design handoff and implementation QA"
+      ],
+      "requirements": [
+        "Strong portfolio demonstrating layout, visual hierarchy, and typography",
+        "Proficiency in Figma (auto-layout, components, variants)",
+        "Understanding of responsive design principles and web constraints",
+        "Attention to micro-details and clean visual aesthetic"
+      ],
+      "skills": [
+        "React",
+        "TypeScript"
+      ],
+      "duration": "3 - 6 Months",
+      "location": "Remote",
+      "workType": "Internship",
+      "deadline": "2026-10-30",
+      "vacancies": 2,
+      "status": "Open",
+      "applicationLink": "careers@olinethra.com",
+      "isFeatured": true
+    },
+    {
+      "id": "full-stack-developer-intern",
+      "title": "Full-Stack Developer Intern",
+      "department": "Engineering",
+      "description": "Build complete end-to-end features for custom web applications. Work across the entire software stack—from frontend UI component implementation to backend database schema migrations.",
+      "responsibilities": [
+        "Implement full-stack features from specification to deployment",
+        "Integrate state management, form validation, and server endpoints",
+        "Write clean, modular code with TypeScript across client and server",
+        "Participate in daily engineering standups and sprint planning"
+      ],
+      "requirements": [
+        "Experience building small full-stack projects using React and Node.js",
+        "Familiarity with TypeScript and database fundamentals",
+        "Basic knowledge of Next.js or express backend servers",
+        "Strong problem-solving skills and self-motivation"
+      ],
+      "skills": [
+        "React",
+        "TypeScript"
+      ],
+      "duration": "3 - 6 Months",
+      "location": "Remote",
+      "workType": "Internship",
+      "deadline": "2026-10-30",
+      "vacancies": 2,
+      "status": "Open",
+      "applicationLink": "careers@olinethra.com",
+      "isFeatured": true
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job-senior-frontend",
+      "title": "Senior Next.js / Frontend Engineer",
+      "department": "Engineering",
+      "employmentType": "Full-time",
+      "location": "San Francisco, CA / Remote",
+      "workType": "Remote",
+      "salary": "$120,000 - $150,000 / year",
+      "description": "Lead the frontend architecture of high-scale web platforms using Next.js App Router, TypeScript, and custom UI design systems.",
+      "responsibilities": [
+        "Architect clean, reusable TypeScript UI components.",
+        "Optimize Core Web Vitals to achieve 99+ performance scores.",
+        "Mentor junior engineers and lead code reviews."
+      ],
+      "requirements": [
+        "4+ years experience with React, Next.js, and TypeScript.",
+        "Strong mastery of Tailwind CSS and design system principles.",
+        "Proven track record delivering production web software."
+      ],
+      "skills": [
+        "Next.js",
+        "React 19",
+        "TypeScript",
+        "Tailwind CSS",
+        "Design Systems"
+      ],
+      "deadline": "2026-09-30",
+      "applicationUrl": "mailto:careers@olinethra.com?subject=Senior%20Frontend%20Engineer",
+      "status": "Open",
+      "isFeatured": true
+    },
+    {
+      "id": "job-fullstack-dev",
+      "title": "Full-Stack Software Engineer (Node + PostgreSQL)",
+      "department": "Engineering",
+      "employmentType": "Full-time",
+      "location": "Remote",
+      "workType": "Remote",
+      "salary": "$110,000 - $140,000 / year",
+      "description": "Design and implement scalable backend APIs, database schemas, and microservices paired with Next.js client applications.",
+      "responsibilities": [
+        "Develop RESTful APIs and serverless microservices.",
+        "Design PostgreSQL & MongoDB schemas with Prisma ORM.",
+        "Ensure top-tier security, authentication, and database speed."
+      ],
+      "requirements": [
+        "3+ years building Node.js / Express backend systems.",
+        "Proficiency with SQL, relational database design, and cloud deployments."
+      ],
+      "skills": [
+        "Node.js",
+        "Express",
+        "PostgreSQL",
+        "Prisma",
+        "TypeScript"
+      ],
+      "deadline": "2026-10-15",
+      "applicationUrl": "mailto:careers@olinethra.com?subject=Full-Stack%20Engineer",
+      "status": "Open",
+      "isFeatured": false
+    }
+  ],
+  "projects": [
+    {
+      "id": "nexus-ecommerce",
+      "title": "Nexus Global E-Commerce",
+      "description": "Designed and built a headless e-commerce architecture utilizing Next.js, Stripe, and modern serverless API endpoints. Features instant page transitions, sub-second search filtering, multi-currency localization, and a bespoke admin dashboard for order fulfillment.",
+      "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800",
+      "gallery": [
+        ""
+      ],
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Stripe API",
+        "PostgreSQL",
+        "Vercel"
+      ],
+      "category": "E-Commerce",
+      "client": "Nexus Brands Group",
+      "projectUrl": "#",
+      "caseStudy": "Designed and built a headless e-commerce architecture utilizing Next.js, Stripe, and modern serverless API endpoints. Features instant page transitions, sub-second search filtering, multi-currency localization, and a bespoke admin dashboard for order fulfillment.",
+      "isFeatured": true,
+      "displayOrder": 1,
+      "status": "Published",
+      "metrics": [
+        {
+          "label": "Page Load Speed",
+          "value": "< 0.4s"
+        },
+        {
+          "label": "Conversion Lift",
+          "value": "+38%"
+        },
+        {
+          "label": "Core Web Vitals",
+          "value": "99/100"
+        }
+      ]
+    },
+    {
+      "id": "strata-saas-dashboard",
+      "title": "Strata Analytics Platform",
+      "description": "An intuitive SaaS monitoring platform that turns complex server telemetry into actionable charts and real-time alerts. Implemented high-throughput data streams, interactive customizable widgets, and fine-grained user permission controls.",
+      "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800",
+      "gallery": [
+        ""
+      ],
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Recharts",
+        "Node.js",
+        "Express",
+        "Tailwind CSS"
+      ],
+      "category": "SaaS Dashboard",
+      "client": "Strata Cloud Intelligence",
+      "projectUrl": "#",
+      "caseStudy": "An intuitive SaaS monitoring platform that turns complex server telemetry into actionable charts and real-time alerts. Implemented high-throughput data streams, interactive customizable widgets, and fine-grained user permission controls.",
+      "isFeatured": true,
+      "displayOrder": 2,
+      "status": "Published",
+      "metrics": [
+        {
+          "label": "Telemetry Ingestion",
+          "value": "10k/sec"
+        },
+        {
+          "label": "User Engagement",
+          "value": "+64%"
+        },
+        {
+          "label": "Uptime",
+          "value": "99.99%"
+        }
+      ]
+    },
+    {
+      "id": "vanguard-bms",
+      "title": "Vanguard Enterprise Resource Manager",
+      "description": "Unified logistics platform built for internal staff and client portals. Replaced fragmented legacy spreadsheets with a cohesive dashboard for real-time tracking, automated PDF invoice generation, and role-based staff authorization.",
+      "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800",
+      "gallery": [
+        ""
+      ],
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "MongoDB",
+        "Tailwind CSS",
+        "shadcn/ui"
+      ],
+      "category": "Business Management",
+      "client": "Vanguard Logistics",
+      "projectUrl": "#",
+      "caseStudy": "Unified logistics platform built for internal staff and client portals. Replaced fragmented legacy spreadsheets with a cohesive dashboard for real-time tracking, automated PDF invoice generation, and role-based staff authorization.",
+      "isFeatured": true,
+      "displayOrder": 3,
+      "status": "Published",
+      "metrics": [
+        {
+          "label": "Processing Overhead",
+          "value": "-45%"
+        },
+        {
+          "label": "Active Operations",
+          "value": "120k/mo"
+        },
+        {
+          "label": "Accuracy Rate",
+          "value": "99.8%"
+        }
+      ]
+    },
+    {
+      "id": "aperture-booking",
+      "title": "Aperture Studio Reservations",
+      "description": "A sleek reservation application enabling visual studio space booking, equipment rental add-ons, calendar integration, and automated SMS/Email reminders for creative professionals.",
+      "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800",
+      "gallery": [
+        ""
+      ],
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Prisma",
+        "PostgreSQL"
+      ],
+      "category": "Web Application",
+      "client": "Aperture Creative Studios",
+      "projectUrl": "#",
+      "caseStudy": "A sleek reservation application enabling visual studio space booking, equipment rental add-ons, calendar integration, and automated SMS/Email reminders for creative professionals.",
+      "isFeatured": true,
+      "displayOrder": 4,
+      "status": "Published",
+      "metrics": [
+        {
+          "label": "Direct Bookings",
+          "value": "+82%"
+        },
+        {
+          "label": "Schedule Conflicts",
+          "value": "0%"
+        },
+        {
+          "label": "Customer Rating",
+          "value": "4.9/5"
+        }
+      ]
+    },
+    {
+      "id": "omni-marketplace",
+      "title": "Omni Digital Asset Exchange",
+      "description": "A secure digital distribution marketplace supporting instant digital product previews, licensing agreements, automatic payouts, and structured metadata searching.",
+      "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800",
+      "gallery": [
+        ""
+      ],
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "Express",
+        "PostgreSQL",
+        "Tailwind CSS"
+      ],
+      "category": "Marketplace",
+      "client": "Omni Media Collective",
+      "projectUrl": "#",
+      "caseStudy": "A secure digital distribution marketplace supporting instant digital product previews, licensing agreements, automatic payouts, and structured metadata searching.",
+      "isFeatured": true,
+      "displayOrder": 5,
+      "status": "Published",
+      "metrics": [
+        {
+          "label": "Monthly Volume",
+          "value": "$1.4M"
+        },
+        {
+          "label": "Search Speed",
+          "value": "85ms"
+        },
+        {
+          "label": "Seller Onboarding",
+          "value": "3 mins"
+        }
+      ]
+    },
+    {
+      "id": "horizon-company-site",
+      "title": "Horizon Quantum Technologies",
+      "description": "A minimalist, high-contrast digital presence engineered to communicate complex research breakthroughs clearly. Built with crisp editorial typography, interactive research paper previews, and dynamic press releases.",
+      "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800",
+      "gallery": [
+        ""
+      ],
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "MDX",
+        "Vercel"
+      ],
+      "category": "Web Application",
+      "client": "Horizon Quantum Labs",
+      "projectUrl": "#",
+      "caseStudy": "A minimalist, high-contrast digital presence engineered to communicate complex research breakthroughs clearly. Built with crisp editorial typography, interactive research paper previews, and dynamic press releases.",
+      "isFeatured": true,
+      "displayOrder": 6,
+      "status": "Published",
+      "metrics": [
+        {
+          "label": "Organic Traffic",
+          "value": "+210%"
+        },
+        {
+          "label": "Bounce Rate",
+          "value": "24%"
+        },
+        {
+          "label": "Lighthouse Rating",
+          "value": "100/100"
+        }
+      ]
+    }
+  ],
+  "services": [
+    {
+      "id": "web-development",
+      "title": "Web Development",
+      "shortDesc": "High-performance, scalable web applications built with modern frameworks and robust architecture.",
+      "fullDesc": "We engineer fast, secure, and production-ready web applications using Next.js, React, and TypeScript. From dynamic SaaS portals to high-converting marketing platforms, our code is modular, well-tested, and optimized for maximum speed and SEO.",
+      "iconName": "Code2",
+      "features": [
+        "Custom Next.js & React App Architecture",
+        "Server-side Rendering & Static Generation",
+        "API Integration & Backend Connectivity",
+        "Core Web Vitals & Performance Optimization"
+      ],
+      "deliverables": [
+        "Production Web Application",
+        "TypeScript Codebase",
+        "CI/CD Pipeline Setup",
+        "Documentation & Maintenance Guide"
+      ],
+      "displayOrder": 1,
+      "status": "Active"
+    },
+    {
+      "id": "ui-ux-design",
+      "title": "UI/UX Design",
+      "shortDesc": "Intuitive, user-centered interface designs crafted for high engagement and seamless navigation.",
+      "fullDesc": "We transform complex user workflows into clean, elegant digital interfaces. Our design process combines user research, wireframing, high-fidelity UI design, and interactive prototyping to ensure every interaction feels natural and rewarding.",
+      "iconName": "Layout",
+      "features": [
+        "Design Systems & Component Libraries",
+        "Wireframing & Interactive Prototyping",
+        "User Journey & Workflow Mapping",
+        "Responsive Layouts for Mobile & Desktop"
+      ],
+      "deliverables": [
+        "Figma Design Files",
+        "Interactive Prototypes",
+        "Design Tokens & Style Guides",
+        "Asset Libraries"
+      ],
+      "displayOrder": 2,
+      "status": "Active"
+    },
+    {
+      "id": "full-stack-development",
+      "title": "Full-Stack Development",
+      "shortDesc": "End-to-end software solutions spanning modern frontends, robust APIs, and scalable databases.",
+      "fullDesc": "Our full-stack team builds comprehensive backend architectures paired with responsive frontend clients. We design robust database schemas, secure REST/GraphQL APIs, and cloud-native integrations built for growth.",
+      "iconName": "Server",
+      "features": [
+        "RESTful API & GraphQL Development",
+        "Database Architecture (PostgreSQL, MongoDB)",
+        "Authentication & Role-Based Access",
+        "Cloud Infrastructure & Serverless Deployments"
+      ],
+      "deliverables": [
+        "Full-Stack Application",
+        "API Specification",
+        "Database Schema",
+        "Security Audit Report"
+      ],
+      "displayOrder": 3,
+      "status": "Active"
+    },
+    {
+      "id": "e-commerce-development",
+      "title": "E-Commerce Development",
+      "shortDesc": "Custom online store platforms optimized for conversion, security, and lightning-fast checkout.",
+      "fullDesc": "We design and build bespoke e-commerce experiences tailored to modern brands. By prioritizing fast load times, frictionless checkout flows, and inventory integration, we empower businesses to drive conversion and scale online sales.",
+      "iconName": "ShoppingBag",
+      "features": [
+        "Headless E-Commerce Solutions",
+        "Payment Gateway Integration (Stripe, PayPal)",
+        "Product Catalog & Cart Management",
+        "Order Processing & Inventory Sync"
+      ],
+      "deliverables": [
+        "Custom E-Commerce Store",
+        "Payment Gateway Setup",
+        "CMS & Product Management",
+        "Analytics Integration"
+      ],
+      "displayOrder": 4,
+      "status": "Active"
+    },
+    {
+      "id": "custom-software",
+      "title": "Custom Software Solutions",
+      "shortDesc": "Tailored business software, internal dashboards, and workflow automation tools.",
+      "fullDesc": "Every organization has unique operational requirements. We build bespoke software applications—from internal admin dashboards and CRM tools to automated reporting pipelines—that streamline operations and reduce overhead.",
+      "iconName": "Cpu",
+      "features": [
+        "Internal Business Dashboards",
+        "Workflow & Process Automation",
+        "Third-Party API Integrations",
+        "Custom Data Visualization & Analytics"
+      ],
+      "deliverables": [
+        "Custom Software Suite",
+        "Role Access Management",
+        "Integration Suite",
+        "Staff Training & Docs"
+      ],
+      "displayOrder": 5,
+      "status": "Active"
+    },
+    {
+      "id": "maintenance-optimization",
+      "title": "Maintenance & Optimization",
+      "shortDesc": "Ongoing technical support, performance tuning, security updates, and infrastructure scaling.",
+      "fullDesc": "Building software is only the first step. We provide continuous support, proactive monitoring, security patch management, and performance optimization to ensure your digital platform remains secure, stable, and blazingly fast.",
+      "iconName": "Zap",
+      "features": [
+        "Performance Audits & Core Web Vitals Fixes",
+        "Security Patching & Dependency Updates",
+        "Infrastructure Monitoring & Error Tracking",
+        "Feature Enhancements & Code Refactoring"
+      ],
+      "deliverables": [
+        "Monthly Performance Reports",
+        "Priority Tech Support",
+        "Security Compliance Audits",
+        "SLAs & Uptime Guarantee"
+      ],
+      "displayOrder": 6,
+      "status": "Active"
+    }
+  ],
+  "faqs": [
+    {
+      "id": "services-overview",
+      "question": "What core services does Olinethra provide?",
+      "answer": "Olinethra specializes in modern web development, custom full-stack software development, UI/UX design, e-commerce storefront engineering, internal business management dashboards, and ongoing technical optimization.",
+      "category": "Services & Tech",
+      "displayOrder": 1,
+      "published": true
+    },
+    {
+      "id": "tech-stack",
+      "question": "What technologies do you use for web applications?",
+      "answer": "Our primary technical stack consists of Next.js (App Router), React, TypeScript, Tailwind CSS, and shadcn/ui for frontend architecture. On the backend, we work with Node.js, Express, PostgreSQL, MongoDB, and serverless edge functions hosted on platforms like Vercel.",
+      "category": "Services & Tech",
+      "displayOrder": 2,
+      "published": true
+    },
+    {
+      "id": "project-timeline",
+      "question": "How long does a typical web application project take?",
+      "answer": "Timelines vary depending on project scope. A standard marketing website or company web presence takes approximately 3 to 5 weeks. Complex web applications, e-commerce platforms, or enterprise dashboards typically take 6 to 12 weeks from discovery to final deployment.",
+      "category": "Process & Timeline",
+      "displayOrder": 3,
+      "published": true
+    },
+    {
+      "id": "startup-pricing",
+      "question": "Do you work with early-stage startups and small businesses?",
+      "answer": "Yes. We regularly partner with early-stage startups to build Minimum Viable Products (MVPs), pitch-ready prototypes, and scalable foundational web architecture designed for rapid iteration.",
+      "category": "General",
+      "displayOrder": 4,
+      "published": true
+    },
+    {
+      "id": "development-process",
+      "question": "What is your step-by-step development process?",
+      "answer": "We follow a 6-phase structured workflow: 01 Discover (requirements & architecture), 02 Plan (sprints & specs), 03 Design (wireframes & Figma UI), 04 Develop (clean TypeScript code), 05 Test (QA, accessibility & performance), and 06 Launch (CI/CD deployment & monitoring).",
+      "category": "Process & Timeline",
+      "displayOrder": 5,
+      "published": true
+    },
+    {
+      "id": "post-launch-support",
+      "question": "Do you offer post-launch maintenance and technical support?",
+      "answer": "Yes, we provide ongoing maintenance retainer plans covering security updates, server monitoring, Core Web Vitals performance tuning, and feature extensions to keep your digital platform running at peak efficiency.",
+      "category": "Services & Tech",
+      "displayOrder": 6,
+      "published": true
+    },
+    {
+      "id": "internship-program",
+      "question": "How can students or junior developers apply for internships at Olinethra?",
+      "answer": "We offer remote internships across Frontend, Backend, UI/UX Design, and Full-Stack Engineering. You can explore available roles in our Careers section and send your portfolio or GitHub links directly to careers@olinethra.com.",
+      "category": "Careers & Internships",
+      "displayOrder": 7,
+      "published": true
+    },
+    {
+      "id": "code-ownership",
+      "question": "Who owns the source code and intellectual property after completion?",
+      "answer": "You do. Upon project completion and final payment, full ownership of all source code, design assets, and intellectual property is transferred directly to your organization.",
+      "category": "General",
+      "displayOrder": 8,
+      "published": true
+    }
+  ],
+  "chatbotKnowledge": [
+    {
+      "id": "kb-1",
+      "topic": "Company Overview",
+      "question": "What is Olinethra?",
+      "answer": "Olinethra is an engineering-first full-stack software development agency based in San Francisco with a global remote team. We engineer production-ready web apps, custom software, and modern websites with 100% source code ownership transfer.",
+      "category": "Company",
+      "lastUpdated": "2026-08-15"
+    },
+    {
+      "id": "kb-2",
+      "topic": "Pricing & Retainers",
+      "question": "How much does a custom project cost?",
+      "answer": "Project pricing is milestone-based: Startup Sprints for MVPs, Full Product Engineering for custom web apps, and Enterprise Retainers for dedicated engineering staff. Contact hello@olinethra.com for a custom proposal.",
+      "category": "Pricing",
+      "lastUpdated": "2026-08-15"
+    }
+  ],
+  "siteSettings": {
+    "heroHeading": "Building Digital Experiences That Matter.",
+    "heroSubheading": "Olinethra is a professional web development studio. We design, architect, and engineer production-grade web applications, modern websites, and digital systems built for reliability and performance.",
+    "heroBadgeText": "AVAILABLE FOR NEW PROJECTS & COLLABORATIONS",
+    "aboutHeading": "An engineering-first software studio focused on craft & performance.",
+    "aboutDescription": "Olinethra was founded to bridge the gap between technical complexity and refined product design. We architect bespoke digital products, web applications, and marketing platforms built for growth.",
+    "contactEmail": "hello@olinethra.com",
+    "contactPhone": "+1 (555) 019-2834",
+    "contactAddress": "San Francisco, CA & Global Remote",
+    "footerTagline": "Building high-performance digital products and scalable web applications.",
+    "githubUrl": "https://github.com/olinethra",
+    "linkedinUrl": "https://linkedin.com/company/olinethra",
+    "twitterUrl": "https://twitter.com/olinethra"
+  },
+  "applications": [
+    {
+      "id": "app-101",
+      "applicantName": "Alex Rivera",
+      "email": "alex.rivera@example.com",
+      "phone": "+1 (555) 234-5678",
+      "opportunityTitle": "Full Stack Web Development Intern",
+      "opportunityType": "Internship",
+      "resumeUrl": "https://example.com/resumes/alex-rivera.pdf",
+      "coverNote": "Passionate CS senior eager to build Next.js applications at Olinethra.",
+      "appliedDate": "2026-08-14",
+      "status": "Reviewing"
+    },
+    {
+      "id": "app-102",
+      "applicantName": "Elena Rostova",
+      "email": "elena.rostova@example.com",
+      "phone": "+1 (555) 987-6543",
+      "opportunityTitle": "Senior Next.js / Frontend Engineer",
+      "opportunityType": "Job",
+      "resumeUrl": "https://example.com/resumes/elena-rostova.pdf",
+      "coverNote": "5 years building complex SaaS dashboards in React and TypeScript.",
+      "appliedDate": "2026-08-15",
+      "status": "Shortlisted"
+    }
+  ],
+  "inquiries": [
+    {
+      "id": "inq-201",
+      "name": "Marcus Vance",
+      "email": "marcus@finovate.io",
+      "company": "Finovate Solutions",
+      "projectType": "Web Application",
+      "budget": "$20,000 - $40,000",
+      "message": "We need a real-time analytics dashboard built with Next.js and PostgreSQL.",
+      "date": "2026-08-15",
+      "status": "New"
+    },
+    {
+      "id": "inq-202",
+      "name": "Sarah Chen",
+      "email": "sarah@aurafashion.com",
+      "company": "Aura Fashion",
+      "projectType": "E-Commerce Store",
+      "budget": "$15,000 - $25,000",
+      "message": "Looking for a headless Shopify storefront with Stripe integration.",
+      "date": "2026-08-13",
+      "status": "In Progress"
+    }
+  ]
+}

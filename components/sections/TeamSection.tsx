@@ -1,17 +1,37 @@
+"use client"
+
+import * as React from "react"
 import { GithubIcon, LinkedinIcon } from "@/components/ui/icons"
-import { teamData, TeamMember } from "@/data/team"
+import { teamData as defaultTeamData } from "@/data/team"
+import { TeamMemberItem, CmsStore } from "@/lib/cms"
 
 export default function TeamSection() {
+  const [teamMembers, setTeamMembers] = React.useState<any[]>([])
+
+  React.useEffect(() => {
+    fetch("/api/admin/cms")
+      .then((res) => res.json())
+      .then((data: CmsStore) => {
+        if (data?.team) {
+          const activeOnly = data.team.filter((t) => t.status === "Active")
+          setTeamMembers(activeOnly)
+        }
+      })
+      .catch(() => {})
+  }, [])
+
+  const displayTeam = teamMembers.length > 0 ? teamMembers : defaultTeamData
+
   return (
     <section id="team" className="border-b border-neutral-200 bg-white py-16 sm:py-24 dark:border-neutral-800 dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end mb-12 sm:mb-16">
           <div>
             <span className="font-mono text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
-              [ LEADERSHIP & TALENT ]
+              [ LEADERSHIP &amp; TALENT ]
             </span>
             <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-neutral-950 dark:text-neutral-50">
-              The Engineering & Design Team
+              The Engineering &amp; Design Team
             </h2>
           </div>
           <p className="max-w-md text-sm text-neutral-600 dark:text-neutral-400">
@@ -20,7 +40,7 @@ export default function TeamSection() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {teamData.map((member: TeamMember) => (
+          {displayTeam.map((member: any) => (
             <div
               key={member.id}
               className="group flex flex-col justify-between rounded-xl border border-neutral-200 bg-white p-5 sm:p-7 transition-all duration-200 hover:border-neutral-400 hover:shadow-sm dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-neutral-700"
@@ -74,7 +94,7 @@ export default function TeamSection() {
               {/* Skills Tags */}
               <div className="pt-4 border-t border-neutral-100 dark:border-neutral-800">
                 <div className="flex flex-wrap gap-1.5">
-                  {member.skills.map((skill) => (
+                  {member.skills?.map((skill: any) => (
                     <span
                       key={skill}
                       className="rounded border border-neutral-200 bg-neutral-50 px-2 py-0.5 font-mono text-[10px] text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300"

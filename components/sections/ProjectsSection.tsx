@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
-import { projectsData, ProjectItem } from "@/data/projects"
+import { projectsData as defaultProjectsData } from "@/data/projects"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -13,16 +13,32 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog"
+import { ProjectCMSItem, CmsStore } from "@/lib/cms"
 
 const categories = ["All", "E-Commerce", "SaaS Dashboard", "Business Management", "Web Application", "Marketplace"]
 
 export default function ProjectsSection() {
   const [selectedCategory, setSelectedCategory] = React.useState("All")
-  const [activeProject, setActiveProject] = React.useState<ProjectItem | null>(null)
+  const [activeProject, setActiveProject] = React.useState<any | null>(null)
+  const [cmsProjects, setCmsProjects] = React.useState<ProjectCMSItem[]>([])
+
+  React.useEffect(() => {
+    fetch("/api/admin/cms")
+      .then((res) => res.json())
+      .then((data: CmsStore) => {
+        if (data?.projects) {
+          const published = data.projects.filter((p) => p.status === "Published")
+          setCmsProjects(published)
+        }
+      })
+      .catch(() => {})
+  }, [])
+
+  const allProjects = cmsProjects.length > 0 ? cmsProjects : defaultProjectsData
 
   const filteredProjects = selectedCategory === "All"
-    ? projectsData
-    : projectsData.filter((p) => p.category === selectedCategory)
+    ? allProjects
+    : allProjects.filter((p) => p.category === selectedCategory)
 
   return (
     <section id="projects" className="border-b border-neutral-200 bg-white py-16 sm:py-24 dark:border-neutral-800 dark:bg-neutral-950">
@@ -69,15 +85,15 @@ export default function ProjectsSection() {
               {/* Black & White Visual Code Placeholder Card */}
               <div className="relative aspect-16/10 w-full overflow-hidden border-b border-neutral-200 bg-neutral-950 p-5 text-neutral-200 dark:border-neutral-800">
                 <div className="flex items-center justify-between font-mono text-[10px] text-neutral-500 uppercase tracking-widest border-b border-neutral-800 pb-2">
-                  <span>{project.imagePlaceholder.title}</span>
-                  <span>{project.year}</span>
+                  <span>{(project as any).imagePlaceholder?.title || project.title}</span>
+                  <span>{(project as any).year || "2026"}</span>
                 </div>
                 <div className="mt-4 space-y-2">
                   <p className="text-xs font-mono text-neutral-300 font-medium">
-                    {project.imagePlaceholder.subtitle}
+                    {(project as any).imagePlaceholder?.subtitle || project.client || "Web Platform"}
                   </p>
                   <div className="rounded border border-neutral-800 bg-neutral-900/90 p-2.5 font-mono text-[11px] text-neutral-400 overflow-x-auto">
-                    <code>{project.imagePlaceholder.codeSnippet}</code>
+                    <code>{(project as any).imagePlaceholder?.codeSnippet || `// Tech Stack: ${project.technologies?.slice(0, 3).join(", ")}`}</code>
                   </div>
                 </div>
                 <div className="absolute bottom-3 right-3 flex gap-1">
@@ -92,13 +108,13 @@ export default function ProjectsSection() {
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <span className="font-mono text-xs text-neutral-500">{project.client}</span>
-                    <span className="font-mono text-xs text-neutral-400">{project.year}</span>
+                    <span className="font-mono text-xs text-neutral-400">{(project as any).year || "2026"}</span>
                   </div>
                   <h3 className="text-xl font-bold text-neutral-950 dark:text-neutral-50 mb-2 group-hover:text-neutral-900">
                     {project.title}
                   </h3>
                   <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 mb-6 line-clamp-2">
-                    {project.summary}
+                    {(project as any).summary || project.description}
                   </p>
 
                   {/* Tech Stack Pills */}
@@ -163,24 +179,26 @@ export default function ProjectsSection() {
               </p>
 
               {/* Metrics Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-y border-neutral-200 py-4 dark:border-neutral-800">
-                {activeProject.metrics.map((m) => (
-                  <div key={m.label} className="text-center bg-neutral-50 dark:bg-neutral-900 p-2.5 rounded-lg sm:bg-transparent dark:sm:bg-transparent">
-                    <div className="font-mono text-lg sm:text-xl font-bold text-neutral-950 dark:text-neutral-50">
-                      {m.value}
+              {activeProject.metrics && activeProject.metrics.length > 0 && (
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-y border-neutral-200 py-4 dark:border-neutral-800">
+                  {activeProject.metrics.map((m: any) => (
+                    <div key={m.label} className="text-center bg-neutral-50 dark:bg-neutral-900 p-2.5 rounded-lg sm:bg-transparent dark:sm:bg-transparent">
+                      <div className="font-mono text-lg sm:text-xl font-bold text-neutral-950 dark:text-neutral-50">
+                        {m.value}
+                      </div>
+                      <div className="text-xs text-neutral-500 font-mono mt-0.5">
+                        {m.label}
+                      </div>
                     </div>
-                    <div className="text-xs text-neutral-500 font-mono mt-0.5">
-                      {m.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
 
               {/* Tech Stack */}
               <div>
                 <h4 className="font-mono text-xs uppercase tracking-wider text-neutral-500 mb-2">Technologies Used</h4>
                 <div className="flex flex-wrap gap-2">
-                  {activeProject.technologies.map((tech) => (
+                  {activeProject.technologies?.map((tech: any) => (
                     <Badge key={tech} variant="monochrome">
                       {tech}
                     </Badge>

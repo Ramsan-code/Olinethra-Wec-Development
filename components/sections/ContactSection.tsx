@@ -42,16 +42,27 @@ export default function ContactSection() {
     return Object.keys(newErrors).length === 0
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!validate()) return
 
     setIsSubmitting(true)
-    // Simulate network validation / submit state cleanly
-    setTimeout(() => {
+    try {
+      const res = await fetch("/api/inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+      if (res.ok) {
+        setIsSubmitted(true)
+      } else {
+        setErrors({ submit: "Failed to send inquiry. Please try again." })
+      }
+    } catch (err) {
+      setErrors({ submit: "Network error submitting inquiry." })
+    } finally {
       setIsSubmitting(false)
-      setIsSubmitted(true)
-    }, 800)
+    }
   }
 
   return (
