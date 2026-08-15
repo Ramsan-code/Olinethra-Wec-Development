@@ -55,19 +55,19 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="border-b border-neutral-200 bg-white py-24 dark:border-neutral-800 dark:bg-neutral-950">
+    <section id="contact" className="border-b border-neutral-200 bg-white py-16 sm:py-24 dark:border-neutral-800 dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
           {/* Contact Details & Info (5 columns) */}
           <div className="lg:col-span-5 space-y-8">
             <div>
               <span className="font-mono text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
                 [ START A CONVERSATION ]
               </span>
-              <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-neutral-950 sm:text-4xl dark:text-neutral-50">
+              <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-neutral-950 dark:text-neutral-50">
                 Let&apos;s discuss your project.
               </h2>
-              <p className="mt-4 text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
+              <p className="mt-4 text-sm sm:text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
                 Have a new web project, architecture inquiry, or software initiative in mind? Fill out the form or reach out directly to our engineering team.
               </p>
             </div>
@@ -113,7 +113,7 @@ export default function ContactSection() {
 
           {/* Form Area (7 columns) */}
           <div className="lg:col-span-7">
-            <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-8 dark:border-neutral-800 dark:bg-neutral-900/60">
+            <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-4 sm:p-6 md:p-8 dark:border-neutral-800 dark:bg-neutral-900/60">
               {isSubmitted ? (
                 <div className="py-12 text-center space-y-4">
                   <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-neutral-950 text-white dark:bg-neutral-100 dark:text-neutral-950">

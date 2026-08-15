@@ -3,29 +3,29 @@ import { Quote } from "lucide-react"
 
 export default function TestimonialsSection() {
   return (
-    <section id="testimonials" className="border-b border-neutral-200 bg-white py-24 dark:border-neutral-800 dark:bg-neutral-950">
+    <section id="testimonials" className="border-b border-neutral-200 bg-white py-16 sm:py-24 dark:border-neutral-800 dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <span className="font-mono text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
             [ CLIENT FEEDBACK ]
           </span>
-          <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-neutral-950 sm:text-4xl dark:text-neutral-50">
+          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-neutral-950 dark:text-neutral-50">
             Client Partnerships & Feedback
           </h2>
-          <p className="mt-4 text-base text-neutral-600 dark:text-neutral-400">
+          <p className="mt-4 text-sm sm:text-base text-neutral-600 dark:text-neutral-400">
             Direct feedback from technical leaders and business operators who partner with Olinethra.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {testimonialsData.map((item: TestimonialItem) => (
             <div
               key={item.id}
-              className="flex flex-col justify-between rounded-xl border border-neutral-200 bg-neutral-50 p-8 dark:border-neutral-800 dark:bg-neutral-900/60"
+              className="flex flex-col justify-between rounded-xl border border-neutral-200 bg-neutral-50 p-5 sm:p-8 dark:border-neutral-800 dark:bg-neutral-900/60"
             >
               <div>
-                <div className="flex items-center justify-between mb-6">
-                  <Quote className="h-6 w-6 text-neutral-400" />
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-6">
+                  <Quote className="h-6 w-6 text-neutral-400 shrink-0" />
                   <span className="rounded border border-neutral-200 bg-white px-2.5 py-0.5 font-mono text-[11px] text-neutral-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300">
                     {item.projectScope}
                   </span>

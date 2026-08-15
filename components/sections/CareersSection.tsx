@@ -17,17 +17,17 @@ export default function CareersSection() {
   const [selectedPosition, setSelectedPosition] = React.useState<CareerPosition | null>(null)
 
   return (
-    <section id="careers" className="border-b border-neutral-200 bg-neutral-50 py-24 dark:border-neutral-800 dark:bg-neutral-900/50">
+    <section id="careers" className="border-b border-neutral-200 bg-neutral-50 py-16 sm:py-24 dark:border-neutral-800 dark:bg-neutral-900/50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end mb-16">
+        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end mb-12 sm:mb-16">
           <div>
-            <div className="inline-flex items-center gap-2 mb-2">
+            <div className="inline-flex flex-wrap items-center gap-2 mb-2">
               <span className="font-mono text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
                 [ JOIN OUR TEAM ]
               </span>
               <Badge variant="monochrome" className="text-[10px]">4 INTERNSHIP ROLES OPEN</Badge>
             </div>
-            <h2 className="text-3xl font-extrabold tracking-tight text-neutral-950 sm:text-4xl dark:text-neutral-50">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-neutral-950 dark:text-neutral-50">
               Careers & Internship Opportunities
             </h2>
           </div>
@@ -37,16 +37,16 @@ export default function CareersSection() {
         </div>
 
         {/* Positions Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {careersData.map((job) => (
             <div
               key={job.id}
-              className="group flex flex-col justify-between rounded-xl border border-neutral-200 bg-white p-7 transition-all duration-200 hover:border-neutral-400 hover:shadow-sm dark:border-neutral-800 dark:bg-neutral-950 dark:hover:border-neutral-700"
+              className="group flex flex-col justify-between rounded-xl border border-neutral-200 bg-white p-5 sm:p-7 transition-all duration-200 hover:border-neutral-400 hover:shadow-sm dark:border-neutral-800 dark:bg-neutral-950 dark:hover:border-neutral-700"
             >
               <div>
                 {/* Meta Header */}
-                <div className="flex items-center justify-between gap-2 mb-4 font-mono text-xs text-neutral-500">
-                  <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-4 font-mono text-xs text-neutral-500">
+                  <div className="flex flex-wrap items-center gap-2">
                     <span className="rounded bg-neutral-100 px-2 py-0.5 text-[11px] font-semibold text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200">
                       {job.type}
                     </span>
@@ -114,14 +114,14 @@ export default function CareersSection() {
       {/* Position Modal */}
       {selectedPosition && (
         <Dialog open={!!selectedPosition} onOpenChange={() => setSelectedPosition(null)}>
-          <DialogContent className="max-w-2xl">
+          <DialogContent className="max-w-2xl w-[92vw] sm:w-full p-5 sm:p-7 max-h-[88vh] overflow-y-auto">
             <DialogHeader>
-              <div className="flex items-center gap-2 font-mono text-xs text-neutral-500 uppercase">
+              <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-neutral-500 uppercase">
                 <span>{selectedPosition.type}</span>
                 <span>•</span>
                 <span>{selectedPosition.location}</span>
               </div>
-              <DialogTitle className="text-2xl font-bold mt-1">
+              <DialogTitle className="text-xl sm:text-2xl font-bold mt-1">
                 {selectedPosition.title}
               </DialogTitle>
               <DialogDescription className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">

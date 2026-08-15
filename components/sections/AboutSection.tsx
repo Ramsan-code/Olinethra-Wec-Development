@@ -31,18 +31,18 @@ const coreValues = [
 
 export default function AboutSection() {
   return (
-    <section id="about" className="border-b border-neutral-200 bg-neutral-50 py-24 dark:border-neutral-800 dark:bg-neutral-900/50">
+    <section id="about" className="border-b border-neutral-200 bg-neutral-50 py-16 sm:py-24 dark:border-neutral-800 dark:bg-neutral-900/50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12 lg:items-start">
           {/* Section Header & Main Text (5 columns) */}
           <div className="lg:col-span-5 space-y-6">
             <div className="inline-block font-mono text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
               [ ABOUT OLINETHRA ]
             </div>
-            <h2 className="text-3xl font-extrabold tracking-tight text-neutral-950 sm:text-4xl dark:text-neutral-50 leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-neutral-950 dark:text-neutral-50 leading-tight">
               An engineering-first software studio focused on craft & performance.
             </h2>
-            <p className="text-base leading-relaxed text-neutral-600 dark:text-neutral-300">
+            <p className="text-sm sm:text-base leading-relaxed text-neutral-600 dark:text-neutral-300">
               Olinethra was founded to bridge the gap between technical complexity and refined product design. We don&apos;t build generic templates—we architect bespoke digital products, web applications, and marketing platforms designed for growth.
             </p>
             <p className="text-base leading-relaxed text-neutral-600 dark:text-neutral-300">

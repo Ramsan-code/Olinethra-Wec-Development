@@ -14,15 +14,15 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="border-b border-neutral-200 bg-white py-24 dark:border-neutral-800 dark:bg-neutral-950">
+    <section id="services" className="border-b border-neutral-200 bg-white py-16 sm:py-24 dark:border-neutral-800 dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Title Header */}
-        <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end mb-16">
+        <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end mb-12 sm:mb-16">
           <div>
             <span className="font-mono text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
               [ OUR CAPABILITIES ]
             </span>
-            <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-neutral-950 sm:text-4xl dark:text-neutral-50">
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-neutral-950 dark:text-neutral-50">
               Services & Technical Solutions
             </h2>
           </div>
@@ -32,14 +32,14 @@ export default function ServicesSection() {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {servicesData.map((service: ServiceItem) => {
             const Icon = iconMap[service.iconName] || Code2
             return (
               <div
                 key={service.id}
                 id={service.id}
-                className="group flex flex-col justify-between rounded-xl border border-neutral-200 bg-white p-7 transition-all duration-200 hover:border-neutral-400 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-neutral-600"
+                className="group flex flex-col justify-between rounded-xl border border-neutral-200 bg-white p-5 sm:p-7 transition-all duration-200 hover:border-neutral-400 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-neutral-600"
               >
                 <div>
                   {/* Icon & ID */}

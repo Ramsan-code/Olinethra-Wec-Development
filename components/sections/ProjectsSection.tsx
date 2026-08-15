@@ -25,15 +25,15 @@ export default function ProjectsSection() {
     : projectsData.filter((p) => p.category === selectedCategory)
 
   return (
-    <section id="projects" className="border-b border-neutral-200 bg-white py-24 dark:border-neutral-800 dark:bg-neutral-950">
+    <section id="projects" className="border-b border-neutral-200 bg-white py-16 sm:py-24 dark:border-neutral-800 dark:bg-neutral-950">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end mb-12">
+        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end mb-10 sm:mb-12">
           <div>
             <span className="font-mono text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
               [ FEATURED CASE STUDIES ]
             </span>
-            <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-neutral-950 sm:text-4xl dark:text-neutral-50">
+            <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-neutral-950 dark:text-neutral-50">
               Selected Software & Web Work
             </h2>
           </div>
@@ -43,12 +43,12 @@ export default function ProjectsSection() {
         </div>
 
         {/* Category Filters */}
-        <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-neutral-100 dark:border-neutral-800">
+        <div className="flex flex-wrap items-center gap-2 mb-8 sm:mb-10 pb-4 border-b border-neutral-100 dark:border-neutral-800 overflow-x-auto">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`rounded-full px-4 py-1.5 text-xs font-mono transition-all ${
+              className={`rounded-full px-3.5 sm:px-4 py-1.5 text-xs font-mono transition-all whitespace-nowrap ${
                 selectedCategory === cat
                   ? "bg-neutral-950 text-white dark:bg-neutral-100 dark:text-neutral-950 font-semibold"
                   : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200 dark:bg-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800"
@@ -60,7 +60,7 @@ export default function ProjectsSection() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredProjects.map((project) => (
             <div
               key={project.id}
@@ -142,14 +142,14 @@ export default function ProjectsSection() {
       {/* Project Detail Modal */}
       {activeProject && (
         <Dialog open={!!activeProject} onOpenChange={() => setActiveProject(null)}>
-          <DialogContent className="max-w-2xl">
+          <DialogContent className="max-w-2xl w-[92vw] sm:w-full p-5 sm:p-7 max-h-[88vh] overflow-y-auto">
             <DialogHeader>
               <div className="flex items-center gap-2 font-mono text-xs text-neutral-500 uppercase">
                 <span>{activeProject.category}</span>
                 <span>•</span>
                 <span>{activeProject.year}</span>
               </div>
-              <DialogTitle className="text-2xl font-bold mt-1">
+              <DialogTitle className="text-xl sm:text-2xl font-bold mt-1">
                 {activeProject.title}
               </DialogTitle>
               <DialogDescription className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
@@ -163,10 +163,10 @@ export default function ProjectsSection() {
               </p>
 
               {/* Metrics Grid */}
-              <div className="grid grid-cols-3 gap-4 border-y border-neutral-200 py-4 dark:border-neutral-800">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-y border-neutral-200 py-4 dark:border-neutral-800">
                 {activeProject.metrics.map((m) => (
-                  <div key={m.label} className="text-center">
-                    <div className="font-mono text-xl font-bold text-neutral-950 dark:text-neutral-50">
+                  <div key={m.label} className="text-center bg-neutral-50 dark:bg-neutral-900 p-2.5 rounded-lg sm:bg-transparent dark:sm:bg-transparent">
+                    <div className="font-mono text-lg sm:text-xl font-bold text-neutral-950 dark:text-neutral-50">
                       {m.value}
                     </div>
                     <div className="text-xs text-neutral-500 font-mono mt-0.5">

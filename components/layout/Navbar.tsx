@@ -43,14 +43,14 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Main Navigation">
+        <nav className="hidden items-center gap-0.5 lg:gap-1.5 md:flex" aria-label="Main Navigation">
           {navLinks.map((link) => {
             const isActive = pathname === link.href
             return (
               <Link
                 key={link.name}
                 href={link.href}
-                className={`rounded-md px-3.5 py-2 text-sm font-medium transition-colors ${
+                className={`rounded-md px-2.5 lg:px-3.5 py-2 text-sm font-medium transition-colors ${
                   isActive
                     ? "bg-neutral-100 text-neutral-950 dark:bg-neutral-800 dark:text-neutral-50 font-semibold"
                     : "text-neutral-600 hover:bg-neutral-50 hover:text-neutral-950 dark:text-neutral-400 dark:hover:bg-neutral-900 dark:hover:text-neutral-100"
@@ -79,14 +79,14 @@ export default function Navbar() {
               <Button
                 variant="outline"
                 size="icon"
-                className="h-9 w-9 border-neutral-300 dark:border-neutral-700"
+                className="h-10 w-10 border-neutral-300 dark:border-neutral-700"
                 aria-label="Toggle navigation menu"
               >
                 <Menu className="h-5 w-5 text-neutral-800 dark:text-neutral-200" />
               </Button>
             </SheetTrigger>
 
-            <SheetContent side="right" className="w-[310px] border-l border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-950">
+            <SheetContent side="right" className="w-[85vw] max-w-[320px] sm:w-[340px] border-l border-neutral-200 bg-white p-5 sm:p-6 dark:border-neutral-800 dark:bg-neutral-950">
               <SheetHeader className="text-left pb-4 border-b border-neutral-200 dark:border-neutral-800">
                 <SheetTitle className="flex items-center gap-2 text-lg font-mono tracking-wider text-neutral-900 dark:text-neutral-100">
                   <div className="flex h-7 w-7 items-center justify-center rounded bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900">
@@ -118,7 +118,7 @@ export default function Navbar() {
               </nav>
 
               <div className="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-800">
-                <Button asChild className="w-full justify-center gap-2 rounded-lg py-3 text-sm font-medium">
+                <Button asChild className="w-full justify-center gap-2 rounded-lg py-3 text-sm font-medium min-h-[44px]">
                   <Link href="/contact" onClick={() => setIsOpen(false)}>
                     Let&apos;s Work Together
                     <ArrowUpRight className="h-4 w-4" />

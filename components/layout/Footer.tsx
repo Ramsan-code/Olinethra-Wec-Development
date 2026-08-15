@@ -6,9 +6,9 @@ export default function Footer() {
   return (
     <footer className="w-full border-t border-neutral-200 bg-neutral-950 text-neutral-100 dark:border-neutral-800">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-12">
           {/* Brand Info (2 columns) */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="sm:col-span-2 space-y-4">
             <Link href="/" className="inline-flex items-center gap-2.5 text-lg font-bold tracking-tight">
               <div className="flex h-8 w-8 items-center justify-center rounded-md bg-white text-neutral-950 font-mono text-xs">
                 <Code2 className="h-4 w-4" />
@@ -23,7 +23,7 @@ export default function Footer() {
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-800 bg-neutral-900 text-neutral-400 transition-colors hover:border-neutral-600 hover:text-white"
+                className="flex h-10 w-10 items-center justify-center rounded-md border border-neutral-800 bg-neutral-900 text-neutral-400 transition-colors hover:border-neutral-600 hover:text-white"
                 aria-label="GitHub"
               >
                 <GithubIcon className="h-4 w-4" />
@@ -32,7 +32,7 @@ export default function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-800 bg-neutral-900 text-neutral-400 transition-colors hover:border-neutral-600 hover:text-white"
+                className="flex h-10 w-10 items-center justify-center rounded-md border border-neutral-800 bg-neutral-900 text-neutral-400 transition-colors hover:border-neutral-600 hover:text-white"
                 aria-label="LinkedIn"
               >
                 <LinkedinIcon className="h-4 w-4" />
@@ -41,14 +41,14 @@ export default function Footer() {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-800 bg-neutral-900 text-neutral-400 transition-colors hover:border-neutral-600 hover:text-white"
+                className="flex h-10 w-10 items-center justify-center rounded-md border border-neutral-800 bg-neutral-900 text-neutral-400 transition-colors hover:border-neutral-600 hover:text-white"
                 aria-label="Twitter"
               >
                 <TwitterIcon className="h-4 w-4" />
               </a>
               <a
                 href="mailto:hello@olinethra.com"
-                className="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-800 bg-neutral-900 text-neutral-400 transition-colors hover:border-neutral-600 hover:text-white"
+                className="flex h-10 w-10 items-center justify-center rounded-md border border-neutral-800 bg-neutral-900 text-neutral-400 transition-colors hover:border-neutral-600 hover:text-white"
                 aria-label="Email"
               >
                 <Mail className="h-4 w-4" />

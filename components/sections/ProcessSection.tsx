@@ -3,25 +3,25 @@ import { Check } from "lucide-react"
 
 export default function ProcessSection() {
   return (
-    <section id="process" className="border-b border-neutral-200 bg-neutral-50 py-24 dark:border-neutral-800 dark:bg-neutral-900/50">
+    <section id="process" className="border-b border-neutral-200 bg-neutral-50 py-16 sm:py-24 dark:border-neutral-800 dark:bg-neutral-900/50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <span className="font-mono text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
             [ DEVELOPMENT WORKFLOW ]
           </span>
-          <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-neutral-950 sm:text-4xl dark:text-neutral-50">
+          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-neutral-950 dark:text-neutral-50">
             Our 6-Phase Engineering Process
           </h2>
-          <p className="mt-4 text-base text-neutral-600 dark:text-neutral-400">
+          <p className="mt-4 text-sm sm:text-base text-neutral-600 dark:text-neutral-400">
             A systematic, predictable software development workflow designed to deliver projects on time, within scope, and bug-free.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {processData.map((step) => (
             <div
               key={step.number}
-              className="relative flex flex-col justify-between rounded-xl border border-neutral-200 bg-white p-7 transition-all duration-200 hover:border-neutral-400 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:border-neutral-700"
+              className="relative flex flex-col justify-between rounded-xl border border-neutral-200 bg-white p-5 sm:p-7 transition-all duration-200 hover:border-neutral-400 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:border-neutral-700"
             >
               <div>
                 {/* Step Number Badge */}
