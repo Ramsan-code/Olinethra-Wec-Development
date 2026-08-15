@@ -22,6 +22,7 @@ export default function ContactSection() {
     email: "",
     company: "",
     projectType: "Web Application",
+    budget: "$5k - $15k",
     message: "",
   })
 
@@ -113,9 +114,9 @@ export default function ContactSection() {
                   <MapPin className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-500">HQ & Workspace</h4>
+                  <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-500">HQ &amp; Workspace</h4>
                   <p className="text-base font-bold text-neutral-950 dark:text-neutral-50">
-                    San Francisco, CA & Global Remote
+                    San Francisco, CA &amp; Global Remote
                   </p>
                 </div>
               </div>
@@ -131,16 +132,16 @@ export default function ContactSection() {
                     <CheckCircle2 className="h-8 w-8" />
                   </div>
                   <h3 className="text-2xl font-bold text-neutral-950 dark:text-neutral-50">
-                    Message Received
+                    Thanks! Your project inquiry has been received.
                   </h3>
                   <p className="max-w-md mx-auto text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                    Thank you for reaching out to Olinethra. Our engineering lead will review your project details and respond within 1 business day.
+                    Our lead engineer will review your scope and get back to you soon (usually within 24 hours).
                   </p>
                   <Button
                     variant="outline"
                     onClick={() => {
                       setIsSubmitted(false)
-                      setFormData({ name: "", email: "", company: "", projectType: "Web Application", message: "" })
+                      setFormData({ name: "", email: "", company: "", projectType: "Web Application", budget: "$5k - $15k", message: "" })
                     }}
                     className="mt-4 border-neutral-300 dark:border-neutral-700"
                   >
@@ -149,6 +150,12 @@ export default function ContactSection() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+                  {errors.submit && (
+                    <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-xs font-mono text-red-600 dark:border-red-900/50 dark:bg-red-950/30">
+                      {errors.submit}
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                     {/* Name */}
                     <div className="space-y-2">
@@ -179,10 +186,10 @@ export default function ContactSection() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
                     {/* Company */}
-                    <div className="space-y-2">
-                      <Label htmlFor="company">Company / Organization</Label>
+                    <div className="space-y-2 sm:col-span-1">
+                      <Label htmlFor="company">Company</Label>
                       <Input
                         id="company"
                         type="text"
@@ -193,13 +200,13 @@ export default function ContactSection() {
                     </div>
 
                     {/* Project Type */}
-                    <div className="space-y-2">
+                    <div className="space-y-2 sm:col-span-1">
                       <Label htmlFor="projectType">Project Type</Label>
                       <select
                         id="projectType"
                         value={formData.projectType}
                         onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                        className="flex h-11 w-full rounded-lg border border-neutral-300 bg-white px-3.5 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:border-neutral-800 dark:bg-neutral-950 dark:focus-visible:ring-neutral-300"
+                        className="flex h-10 w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:border-neutral-800 dark:bg-neutral-950 dark:focus-visible:ring-neutral-300"
                       >
                         {projectTypes.map((type) => (
                           <option key={type} value={type}>
@@ -208,13 +215,30 @@ export default function ContactSection() {
                         ))}
                       </select>
                     </div>
+
+                    {/* Budget Range */}
+                    <div className="space-y-2 sm:col-span-1">
+                      <Label htmlFor="budget">Budget Range</Label>
+                      <select
+                        id="budget"
+                        value={formData.budget}
+                        onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                        className="flex h-10 w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 dark:border-neutral-800 dark:bg-neutral-950 dark:focus-visible:ring-neutral-300"
+                      >
+                        <option value="<$5k">&lt; $5,000</option>
+                        <option value="$5k - $15k">$5,000 - $15,000</option>
+                        <option value="$15k - $30k">$15,000 - $30,000</option>
+                        <option value="$30k+">$30,000+</option>
+                      </select>
+                    </div>
                   </div>
 
                   {/* Message */}
                   <div className="space-y-2">
-                    <Label htmlFor="message">Project Description & Scope *</Label>
+                    <Label htmlFor="message">Project Description &amp; Scope *</Label>
                     <Textarea
                       id="message"
+                      rows={4}
                       placeholder="Tell us about your project goals, technical requirements, and target timeline..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -226,13 +250,13 @@ export default function ContactSection() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full justify-center gap-2 py-6 text-base font-medium"
+                    className="w-full justify-center gap-2 py-6 text-base font-medium min-h-[48px] bg-neutral-950 text-white dark:bg-neutral-50 dark:text-neutral-950"
                   >
                     {isSubmitting ? (
-                      <span>Sending Message...</span>
+                      <span>Sending Inquiry...</span>
                     ) : (
                       <>
-                        <span>Submit Project Inquiry</span>
+                        <span>Start a Project</span>
                         <Send className="h-4 w-4" />
                       </>
                     )}
