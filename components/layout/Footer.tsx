@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Code2, ArrowUpRight, Mail } from "lucide-react"
+import { Code2, Mail } from "lucide-react"
 import { GithubIcon, LinkedinIcon, TwitterIcon } from "@/components/ui/icons"
 
 export default function Footer() {

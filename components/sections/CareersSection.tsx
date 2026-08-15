@@ -1,8 +1,7 @@
 "use client"
 
 import * as React from "react"
-import Link from "next/link"
-import { Briefcase, MapPin, Mail, ArrowUpRight, Check, Award } from "lucide-react"
+import { MapPin, Mail, Check } from "lucide-react"
 import { careersData, CareerPosition } from "@/data/careers"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"

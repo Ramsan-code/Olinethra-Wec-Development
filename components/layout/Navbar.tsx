@@ -66,7 +66,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           <Button asChild variant="default" size="sm" className="rounded-md px-4 font-medium tracking-wide">
             <Link href="/contact" className="flex items-center gap-1.5">
-              Let's Work Together
+              Let&apos;s Work Together
               <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
           </Button>
@@ -120,7 +120,7 @@ export default function Navbar() {
               <div className="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-800">
                 <Button asChild className="w-full justify-center gap-2 rounded-lg py-3 text-sm font-medium">
                   <Link href="/contact" onClick={() => setIsOpen(false)}>
-                    Let's Work Together
+                    Let&apos;s Work Together
                     <ArrowUpRight className="h-4 w-4" />
                   </Link>
                 </Button>

@@ -43,7 +43,7 @@ export default function AboutSection() {
               An engineering-first software studio focused on craft & performance.
             </h2>
             <p className="text-base leading-relaxed text-neutral-600 dark:text-neutral-300">
-              Olinethra was founded to bridge the gap between technical complexity and refined product design. We don't build generic templates—we architect bespoke digital products, web applications, and marketing platforms designed for growth.
+              Olinethra was founded to bridge the gap between technical complexity and refined product design. We don&apos;t build generic templates—we architect bespoke digital products, web applications, and marketing platforms designed for growth.
             </p>
             <p className="text-base leading-relaxed text-neutral-600 dark:text-neutral-300">
               Our multidisciplinary team of full-stack engineers and UI designers collaborates closely with startups, growth-stage companies, and enterprises to deliver software that scales effortlessly.

@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Mail, Phone, MapPin, Send, CheckCircle2, ArrowRight } from "lucide-react"
+import { Mail, Phone, MapPin, Send, CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -65,7 +65,7 @@ export default function ContactSection() {
                 [ START A CONVERSATION ]
               </span>
               <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-neutral-950 sm:text-4xl dark:text-neutral-50">
-                Let's discuss your project.
+                Let&apos;s discuss your project.
               </h2>
               <p className="mt-4 text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
                 Have a new web project, architecture inquiry, or software initiative in mind? Fill out the form or reach out directly to our engineering team.

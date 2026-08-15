@@ -1,8 +1,5 @@
-import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
 import { GithubIcon, LinkedinIcon } from "@/components/ui/icons"
 import { teamData, TeamMember } from "@/data/team"
-import { Badge } from "@/components/ui/badge"
 
 export default function TeamSection() {
   return (

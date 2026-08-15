@@ -1,7 +1,6 @@
 import Link from "next/link"
-import { ArrowRight, Terminal, CheckCircle2, ChevronRight } from "lucide-react"
+import { ArrowRight, CheckCircle2, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 
 export default function HeroSection() {
   return (

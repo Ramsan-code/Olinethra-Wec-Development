@@ -31,7 +31,7 @@ export default function TestimonialsSection() {
                   </span>
                 </div>
                 <p className="text-base leading-relaxed text-neutral-800 dark:text-neutral-200 font-normal">
-                  "{item.quote}"
+                  &quot;{item.quote}&quot;
                 </p>
               </div>
 
