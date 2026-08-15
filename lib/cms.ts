@@ -21,6 +21,7 @@ export interface TeamMemberItem {
   email?: string
   displayOrder: number
   status: "Active" | "Inactive"
+  published?: boolean
 }
 
 export interface InternshipItem {
