@@ -6,7 +6,7 @@
       "role": "Founder & CEO",
       "department": "Engineering",
       "bio": "Systems architect and technology strategist with over 10 years of experience scaling web applications and digital infrastructure.",
-      "photoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400",
+      "photoUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600",
       "skills": [
         "System Architecture",
         "Product Strategy",
@@ -22,7 +22,7 @@
       "role": "Lead Full-Stack Developer",
       "department": "Engineering",
       "bio": "Full-stack engineer specialized in distributed systems, high-performance Node.js APIs, and modern React architectures.",
-      "photoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400",
+      "photoUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600",
       "skills": [
         "Next.js",
         "TypeScript",
@@ -39,7 +39,7 @@
       "role": "UI/UX Design Director",
       "department": "Engineering",
       "bio": "Product designer focused on minimal design systems, typography hierarchy, accessibility, and high-converting user interfaces.",
-      "photoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400",
+      "photoUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600",
       "skills": [
         "Design Systems",
         "Figma",
@@ -56,7 +56,7 @@
       "role": "Frontend Developer",
       "department": "Engineering",
       "bio": "Frontend craftsman passionate about micro-interactions, responsive CSS layouts, performance optimization, and Web Vitals.",
-      "photoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400",
+      "photoUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600",
       "skills": [
         "React",
         "TypeScript",
@@ -73,7 +73,7 @@
       "role": "Backend & Database Engineer",
       "department": "Engineering",
       "bio": "Backend developer specializing in database query optimization, security protocols, cloud microservices, and serverless APIs.",
-      "photoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400",
+      "photoUrl": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600",
       "skills": [
         "Node.js",
         "Express",
@@ -90,7 +90,7 @@
       "role": "QA & Reliability Engineer",
       "department": "Engineering",
       "bio": "Quality assurance engineer dedicated to end-to-end automated testing, accessibility standards validation, and stress testing.",
-      "photoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400",
+      "photoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600",
       "skills": [
         "Automated Testing",
         "Playwright",
