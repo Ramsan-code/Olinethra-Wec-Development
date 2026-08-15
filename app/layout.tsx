@@ -64,6 +64,8 @@ export const metadata: Metadata = {
   },
 }
 
+import Chatbot from "@/components/chat/Chatbot"
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -76,6 +78,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-white text-neutral-950 dark:bg-neutral-950 dark:text-neutral-50 selection:bg-neutral-900 selection:text-white dark:selection:bg-white dark:selection:text-neutral-900">
         {children}
+        <Chatbot />
       </body>
     </html>
   )
