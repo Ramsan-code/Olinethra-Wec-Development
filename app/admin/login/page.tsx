@@ -2,11 +2,10 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
-import { Lock, Mail, Code2, ShieldAlert, ArrowRight } from "lucide-react"
+import { Lock, Mail, ShieldAlert } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { DEMO_ADMINS } from "@/lib/auth"
 
 export default function AdminLoginPage() {
   const router = useRouter()
@@ -29,21 +28,15 @@ export default function AdminLoginPage() {
 
       const data = await res.json()
       if (res.ok && data.success) {
-        localStorage.setItem("olinethra_admin_user", JSON.stringify(data.user))
         router.push("/admin")
       } else {
-        setError(data.error || "Authentication failed. Please verify email and password.")
+        setError(data.error?.message || "Authentication failed. Please verify email and password.")
       }
-    } catch (err) {
+    } catch {
       setError("Network or server connection error.")
     } finally {
       setIsSubmitting(false)
     }
-  }
-
-  const handleDemoSelect = (demo: typeof DEMO_ADMINS[0]) => {
-    setEmail(demo.email)
-    setPassword(demo.password)
   }
 
   return (
@@ -115,28 +108,6 @@ export default function AdminLoginPage() {
             </Button>
           </form>
 
-          {/* Quick Demo Access Roles */}
-          <div className="border-t border-neutral-800 pt-4 space-y-2">
-            <p className="font-mono text-[10px] uppercase tracking-wider text-neutral-400 text-center">
-              [ QUICK DEMO ACCOUNTS ]
-            </p>
-            <div className="space-y-1.5">
-              {DEMO_ADMINS.map((demo) => (
-                <button
-                  key={demo.id}
-                  type="button"
-                  onClick={() => handleDemoSelect(demo)}
-                  className="flex w-full items-center justify-between rounded-lg border border-neutral-800 bg-neutral-950 p-2.5 text-left text-xs transition-colors hover:border-neutral-700 hover:bg-neutral-800/60"
-                >
-                  <div>
-                    <span className="font-bold text-white block">{demo.role}</span>
-                    <span className="text-[10px] font-mono text-neutral-400">{demo.email}</span>
-                  </div>
-                  <ArrowRight className="h-3.5 w-3.5 text-neutral-500" />
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
 
         <p className="text-center font-mono text-[10px] text-neutral-500">

@@ -24,16 +24,10 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-## Admin Portal & Credentials
+## Express API and admin portal
 
-Access the internal admin portal at `/admin/login`:
-- **Default Email**: `admin@olinethra.com`
-- **Default Password**: `admin123`
+The production API lives in [`olinethra-api`](./olinethra-api). Configure and run it first, set `API_URL` in `.env.local`, then access the admin portal at `/admin/login`. There are no built-in credentials; create the initial bcrypt-hashed administrator using the backend's environment-driven seed command.
 
 ## Production Deployment on Vercel
 
-Configure environment variables in **Vercel → Project Settings → Environment Variables**:
-- `NEXT_PUBLIC_APP_URL`
-- `AUTH_SECRET`
-- `GEMINI_API_KEY` (Optional for AI Chatbot)
-- `RESEND_API_KEY` (Optional for transactional emails)
+Configure `NEXT_PUBLIC_APP_URL`, `API_URL`, and `NEXT_PUBLIC_API_URL` in the frontend host. Configure database, JWT, Cloudinary, AI, and email secrets only on the backend host using [`olinethra-api/.env.example`](./olinethra-api/.env.example).

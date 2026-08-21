@@ -17,18 +17,15 @@ export default function ProjectsSection() {
   const videoRef = React.useRef<HTMLVideoElement>(null)
   const [isVisible, setIsVisible] = React.useState(false)
   const [isPlaying, setIsPlaying] = React.useState(true)
-  const [reducedMotion, setReducedMotion] = React.useState(false)
-
-  React.useEffect(() => {
-    // Detect prefers-reduced-motion
-    if (typeof window !== "undefined") {
+  const reducedMotion = React.useSyncExternalStore(
+    (notify) => {
       const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-      setReducedMotion(mediaQuery.matches)
-      const listener = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
-      mediaQuery.addEventListener("change", listener)
-      return () => mediaQuery.removeEventListener("change", listener)
-    }
-  }, [])
+      mediaQuery.addEventListener("change", notify)
+      return () => mediaQuery.removeEventListener("change", notify)
+    },
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => false
+  )
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(

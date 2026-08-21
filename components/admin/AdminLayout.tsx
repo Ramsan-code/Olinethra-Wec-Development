@@ -55,8 +55,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [loading, setLoading] = React.useState(true)
 
   React.useEffect(() => {
-    // Fetch session admin
-    fetch("/api/admin/cms")
+    fetch("/api/admin/auth/me")
       .then((res) => {
         if (res.status === 401) {
           router.push("/admin/login")
@@ -64,14 +63,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         }
         return res.json()
       })
-      .then(() => {
-        // Read demo session from cookie/local
-        const saved = localStorage.getItem("olinethra_admin_user")
-        if (saved) {
-          setAdmin(JSON.parse(saved))
-        } else {
-          setAdmin({ id: "1", name: "Olinethra Director", email: "admin@olinethra.com", role: "Super Admin" })
-        }
+      .then((body) => {
+        if (!body) return
+        setAdmin(body.data.user)
         setLoading(false)
       })
       .catch(() => {
@@ -81,7 +75,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const handleLogout = async () => {
     await fetch("/api/admin/auth/logout", { method: "POST" })
-    localStorage.removeItem("olinethra_admin_user")
     router.push("/admin/login")
   }
 

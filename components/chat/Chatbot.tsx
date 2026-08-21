@@ -60,7 +60,7 @@ export default function Chatbot() {
     if (!query || isLoading) return
 
     const userMessage: Message = {
-      id: Date.now().toString(),
+      id: crypto.randomUUID(),
       role: "user",
       content: query,
     }
@@ -84,7 +84,7 @@ export default function Chatbot() {
       if (response.ok) {
         const data = await response.json()
         const assistantMessage: Message = {
-          id: (Date.now() + 1).toString(),
+          id: crypto.randomUUID(),
           role: "assistant",
           content: data.response || "Thank you for reaching out!",
           suggestedAction: data.suggestedAction,
