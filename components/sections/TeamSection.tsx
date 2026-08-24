@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { Mail, Globe, AlertCircle, Users } from "lucide-react"
-import { GithubIcon, LinkedinIcon } from "@/components/ui/icons"
+import { GithubIcon, LinkedinIcon, MediumIcon } from "@/components/ui/icons"
 import { teamData as defaultTeamData } from "@/data/team"
 import { CmsStore } from "@/lib/cms"
 import { Badge } from "@/components/ui/badge"
@@ -111,6 +111,7 @@ export default function TeamSection() {
               const photoUrl = member.photoUrl || member.photo || member.avatar
               const githubUrl = member.githubUrl || member.github
               const linkedinUrl = member.linkedinUrl || member.linkedin
+              const mediumUrl = member.mediumUrl || member.medium
               const portfolioUrl = member.portfolioUrl || member.portfolio
               const email = member.email
 
@@ -205,6 +206,18 @@ export default function TeamSection() {
                           aria-label={`${member.name} GitHub Profile`}
                         >
                           <GithubIcon className="h-3.5 w-3.5" />
+                        </a>
+                      )}
+                      {isValidUrl(mediumUrl) && (
+                        <a
+                          href={mediumUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex h-8 w-8 items-center justify-center rounded border border-neutral-200 bg-neutral-50 text-neutral-600 transition-all duration-200 hover:border-neutral-400 hover:text-neutral-950 hover:-translate-y-0.5 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+                          aria-label={`${member.name} Medium Writing Profile`}
+                          title={`${member.name}'s writing on Medium`}
+                        >
+                          <MediumIcon className="h-3.5 w-3.5" />
                         </a>
                       )}
                       {isValidUrl(portfolioUrl) && (

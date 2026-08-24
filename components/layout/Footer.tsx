@@ -151,6 +151,17 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <a
+                  href="https://medium.com/@thavamramsan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 transition-colors hover:text-white"
+                >
+                  <span>Founder&apos;s Medium</span>
+                  <ExternalLink className="h-3 w-3 text-neutral-400" />
+                </a>
+              </li>
+              <li>
                 <Link href="/playground" className="inline-flex items-center gap-1.5 transition-colors hover:text-white">
                   Playground &amp; Labs
                   <span className="rounded bg-emerald-500/20 px-1.5 py-0.5 text-[10px] font-mono text-emerald-400 uppercase font-bold">

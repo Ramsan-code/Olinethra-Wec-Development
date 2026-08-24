@@ -48,13 +48,32 @@ export default function AboutSection() {
             <p className="text-base leading-relaxed text-neutral-600 dark:text-neutral-300">
               Our multidisciplinary team of full-stack engineers and UI designers collaborates closely with startups, growth-stage companies, and enterprises to deliver software that scales effortlessly.
             </p>
-            <div className="pt-2">
-              <Button asChild variant="outline" className="border-neutral-300 dark:border-neutral-700">
+            <div className="pt-2 flex flex-wrap items-center gap-3">
+              <Button asChild variant="outline" className="border-neutral-300 dark:border-neutral-700 text-xs">
                 <Link href="/about" className="flex items-center gap-1.5 font-medium">
                   Read Our Full Story
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
               </Button>
+            </div>
+
+            {/* Compact Founder's Notes Medium Callout */}
+            <div className="pt-4 border-t border-neutral-200 dark:border-neutral-800 space-y-2">
+              <div className="font-mono text-[10px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400 font-bold">
+                [ FOUNDER&apos;S NOTES ]
+              </div>
+              <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                Engineering ideas, lessons, and observations from building Olinethra.
+              </p>
+              <a
+                href="https://medium.com/@thavamramsan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 font-mono text-xs font-bold text-neutral-950 dark:text-neutral-50 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+              >
+                <span>Read on Medium</span>
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
             </div>
           </div>
 

@@ -17,6 +17,7 @@ export interface TeamMemberItem {
   skills: string[]
   linkedin?: string
   github?: string
+  medium?: string
   portfolio?: string
   email?: string
   displayOrder: number
@@ -227,6 +228,7 @@ function getSeedData(): CmsStore {
       skills: t.skills || ["TypeScript", "Next.js"],
       linkedin: t.linkedinUrl || t.socialLinks?.linkedin || t.linkedin || "https://linkedin.com",
       github: t.githubUrl || t.socialLinks?.github || t.github || "https://github.com",
+      medium: t.mediumUrl || t.socialLinks?.medium || t.medium,
       email: t.email || "dev@olinethra.com",
       displayOrder: idx + 1,
       status: "Active",

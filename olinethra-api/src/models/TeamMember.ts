@@ -10,6 +10,7 @@ export interface ITeamMember {
   skills: string[]
   linkedin?: string
   github?: string
+  medium?: string
   portfolio?: string
   email?: string
   displayOrder: number
@@ -28,6 +29,7 @@ const teamMemberSchema = new Schema<ITeamMember>(
     skills: { type: [String], default: [] },
     linkedin: String,
     github: String,
+    medium: String,
     portfolio: String,
     email: String,
     displayOrder: { type: Number, default: 0, index: true },

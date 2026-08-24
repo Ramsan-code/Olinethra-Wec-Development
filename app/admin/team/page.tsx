@@ -350,6 +350,16 @@ export default function TeamAdminPage() {
                   </div>
 
                   <div className="space-y-1">
+                    <Label className="text-xs font-mono">Medium URL (Founder Blog)</Label>
+                    <Input
+                      value={editingItem.medium || ""}
+                      onChange={(e) => setEditingItem({ ...editingItem, medium: e.target.value })}
+                      placeholder="https://medium.com/@..."
+                      className="text-xs font-mono"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
                     <Label className="text-xs font-mono">Portfolio URL</Label>
                     <Input
                       value={editingItem.portfolio || ""}

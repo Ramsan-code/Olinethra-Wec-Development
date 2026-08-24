@@ -8,6 +8,7 @@ export interface TeamMember {
   skills: string[]
   githubUrl?: string
   linkedinUrl?: string
+  mediumUrl?: string
   initials: string
 }
 
@@ -22,6 +23,7 @@ export const teamData: TeamMember[] = [
     photoUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600",
     githubUrl: "https://github.com/olinethra",
     linkedinUrl: "https://linkedin.com/company/olinethra",
+    mediumUrl: "https://medium.com/@thavamramsan",
     initials: "TR",
   },
   {
