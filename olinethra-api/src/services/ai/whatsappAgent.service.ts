@@ -2,6 +2,8 @@ import { saveCmsSnapshot } from "../cms.service.js"
 import { Lead, Conversation, Notification } from "../../models/index.js"
 import { env } from "../../config/env.js"
 import { generateLegacyId } from "../../utils/helpers.js"
+import { scoreLead } from "../leadScoring.service.js"
+
 import type { IConversation } from "../../models/Conversation.js"
 
 export interface AgentProcessingResult {
@@ -319,11 +321,14 @@ export async function processWhatsAppMessage(
       responseText = brief
     }
 
+    await scoreLead(lead).catch((err) => console.warn("[ML SCORING WARNING] Auto-rescore in agent failed:", err))
+
     return {
       reply: responseText,
       leadCreatedOrUpdated: true,
       intent: "PROJECT_INQUIRY",
     }
+
   }
 
   // 7. FAQ custom matching from CMS Chatbot Knowledge & FAQs

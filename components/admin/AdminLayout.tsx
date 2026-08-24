@@ -23,7 +23,9 @@ import {
   Code2,
   ShieldCheck,
   PhoneCall,
+  Brain,
 } from "lucide-react"
+
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 
@@ -47,9 +49,11 @@ const navItems = [
   { href: "/admin/applications", label: "Applications", icon: FileText },
   { href: "/admin/inquiries", label: "Project Inquiries", icon: MessageSquare },
   { href: "/admin/quotes", label: "Quotation Archive", icon: FileText },
+  { href: "/admin/analytics/ml", label: "Lead Intelligence ML", icon: Brain },
   { href: "/admin/media", label: "Media Library", icon: ImageIcon },
   { href: "/admin/settings", label: "Site Settings", icon: Settings },
 ]
+
 
 
 

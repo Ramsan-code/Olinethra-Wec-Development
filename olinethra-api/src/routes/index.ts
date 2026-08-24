@@ -91,3 +91,16 @@ apiRouter.delete("/admin/quotes/:id", requireAuth, deleteQuote)
 apiRouter.get("/admin/quotes/:id/view", requireAuth, viewQuotePdf)
 apiRouter.get("/admin/quotes/:id/download", requireAuth, downloadQuotePdf)
 
+import {
+  getMlStatusHandler,
+  scoreSingleLeadHandler,
+  rescoreAllOpenLeadsHandler,
+  triggerModelRetrainHandler,
+} from "../controllers/ml.controller.js"
+
+// Admin ML Lead Intelligence Endpoints
+apiRouter.get("/admin/ml/status", requireAuth, getMlStatusHandler)
+apiRouter.post("/admin/leads/:id/score", requireAuth, scoreSingleLeadHandler)
+apiRouter.post("/admin/leads/batch-score", requireAuth, rescoreAllOpenLeadsHandler)
+apiRouter.post("/admin/ml/retrain", requireAuth, triggerModelRetrainHandler)
+

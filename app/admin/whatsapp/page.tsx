@@ -20,6 +20,8 @@ import {
   Sparkles,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { LeadQualityCard } from "@/components/admin/LeadQualityCard"
+
 
 interface LeadData {
   _id?: string
@@ -365,7 +367,18 @@ export default function AdminWhatsAppPage() {
                     </div>
                   </div>
 
+                  {selectedConversation.leadId && (
+                    <div className="p-4 border-b border-neutral-200 dark:border-neutral-800 bg-neutral-900/30">
+                      <LeadQualityCard
+                        leadId={String(selectedConversation.leadId._id || selectedConversation.leadId.legacyId || selectedConversation.leadId)}
+                        ml={(selectedConversation.leadId as any).ml}
+                        onRescored={() => fetchConversationDetail(selectedConversation._id)}
+                      />
+                    </div>
+                  )}
+
                   {/* Summary / Brief Banner if available */}
+
                   {selectedConversation.summary && (
                     <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 border-b border-emerald-200 dark:border-emerald-900 text-xs font-mono text-emerald-900 dark:text-emerald-200 whitespace-pre-wrap">
                       {selectedConversation.summary}

@@ -5,6 +5,8 @@ import { storeMessage, updateConversationStatus, resetUnreadCount } from "../ser
 import { Conversation, Message, Lead } from "../models/index.js"
 import { AppError } from "../middleware/error.middleware.js"
 import { logActivity } from "../services/activity.service.js"
+import { scoreLead } from "../services/leadScoring.service.js"
+
 
 export async function verifyWebhook(req: Request, res: Response): Promise<void> {
   const mode = req.query["hub.mode"] as string | undefined
@@ -197,6 +199,10 @@ export async function updateLead(req: Request, res: Response, next: NextFunction
     if (projectType) updateFields.projectType = projectType
 
     const updatedLead = await Lead.findByIdAndUpdate(conversation.leadId, updateFields, { new: true })
+    if (updatedLead) {
+      await scoreLead(updatedLead).catch((err) => console.warn("[ML SCORING WARNING] Lead rescore failed:", err))
+    }
+
 
     if (status) {
       conversation.status = status
