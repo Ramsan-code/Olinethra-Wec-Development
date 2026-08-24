@@ -16,7 +16,8 @@ import {
   listTeam,
 } from "../controllers/public.controller.js"
 import { requireAuth } from "../middleware/auth.middleware.js"
-import { authLimiter, chatLimiter, formLimiter } from "../middleware/rateLimit.middleware.js"
+import { requireRole } from "../middleware/role.middleware.js"
+import { authLimiter, chatLimiter, formLimiter, aiGenLimiter } from "../middleware/rateLimit.middleware.js"
 
 import {
   verifyWebhook,
@@ -27,50 +28,18 @@ import {
   takeoverConversation,
   resumeAi,
   updateLead,
-  listLeads,
-  getInsights,
 } from "../controllers/whatsapp.controller.js"
 
-export const apiRouter = Router()
+import {
+  listUsers,
+  inviteUser,
+  activateUser,
+  forgotPassword,
+  resetPassword,
+  updateUserStatus,
+  updateUserRole,
+} from "../controllers/user.controller.js"
 
-apiRouter.get("/health", health)
-
-// Official WhatsApp Webhook endpoints
-apiRouter.get("/webhooks/whatsapp", verifyWebhook)
-apiRouter.post("/webhooks/whatsapp", handleWebhook)
-
-apiRouter.post("/auth/login", authLimiter, login)
-apiRouter.post("/auth/refresh", authLimiter, refresh)
-apiRouter.post("/auth/logout", requireAuth, logout)
-apiRouter.get("/auth/me", requireAuth, me)
-
-apiRouter.get("/projects", listProjects)
-apiRouter.get("/projects/:slug", getProjectBySlug)
-apiRouter.get("/team", listTeam)
-apiRouter.get("/services", listServices)
-apiRouter.get("/faqs", listFaqs)
-apiRouter.get("/internships", listInternships)
-apiRouter.get("/jobs", listJobs)
-apiRouter.get("/settings", getSettings)
-apiRouter.get("/cms", getPublicCms)
-
-apiRouter.post("/inquiries", formLimiter, submitInquiry)
-apiRouter.post("/contact", formLimiter, submitInquiry)
-apiRouter.post("/applications", formLimiter, submitApplication)
-apiRouter.post("/chat", chatLimiter, chat)
-
-// Backward-compatible endpoint used by the existing Admin Dashboard. The
-// service layer persists each entity in its own MongoDB collection.
-apiRouter.get("/admin/cms", requireAuth, getCms)
-apiRouter.post("/admin/cms", requireAuth, postCms)
-
-// Admin WhatsApp Management Endpoints
-apiRouter.get("/admin/whatsapp/conversations", requireAuth, listConversations)
-apiRouter.get("/admin/whatsapp/conversations/:id", requireAuth, getConversation)
-apiRouter.post("/admin/whatsapp/conversations/:id/message", requireAuth, sendMessage)
-apiRouter.post("/admin/whatsapp/conversations/:id/takeover", requireAuth, takeoverConversation)
-apiRouter.post("/admin/whatsapp/conversations/:id/resume-ai", requireAuth, resumeAi)
-apiRouter.patch("/admin/whatsapp/conversations/:id/lead", requireAuth, updateLead)
 import {
   uploadQuote,
   listQuotes,
@@ -82,27 +51,12 @@ import {
 } from "../controllers/quote.controller.js"
 import { upload } from "../middleware/upload.middleware.js"
 
-// Admin Quotation Archive Endpoints
-apiRouter.get("/admin/quotes", requireAuth, listQuotes)
-apiRouter.post("/admin/quotes", requireAuth, upload.single("file"), uploadQuote)
-apiRouter.get("/admin/quotes/:id", requireAuth, getQuote)
-apiRouter.patch("/admin/quotes/:id", requireAuth, updateQuote)
-apiRouter.delete("/admin/quotes/:id", requireAuth, deleteQuote)
-apiRouter.get("/admin/quotes/:id/view", requireAuth, viewQuotePdf)
-apiRouter.get("/admin/quotes/:id/download", requireAuth, downloadQuotePdf)
-
 import {
   getMlStatusHandler,
   scoreSingleLeadHandler,
   rescoreAllOpenLeadsHandler,
   triggerModelRetrainHandler,
 } from "../controllers/ml.controller.js"
-
-// Admin ML Lead Intelligence Endpoints
-apiRouter.get("/admin/ml/status", requireAuth, getMlStatusHandler)
-apiRouter.post("/admin/leads/:id/score", requireAuth, scoreSingleLeadHandler)
-apiRouter.post("/admin/leads/batch-score", requireAuth, rescoreAllOpenLeadsHandler)
-apiRouter.post("/admin/ml/retrain", requireAuth, triggerModelRetrainHandler)
 
 import {
   listPublicInsightsHandler,
@@ -122,8 +76,72 @@ import {
   generateTechBriefHandler,
   aiAssistHandler,
 } from "../controllers/insights.controller.js"
-import { requireRole } from "../middleware/role.middleware.js"
-import { aiGenLimiter } from "../middleware/rateLimit.middleware.js"
+
+export const apiRouter = Router()
+
+apiRouter.get("/health", health)
+
+// Official WhatsApp Webhook endpoints
+apiRouter.get("/webhooks/whatsapp", verifyWebhook)
+apiRouter.post("/webhooks/whatsapp", handleWebhook)
+
+// Authentication Endpoints
+apiRouter.post("/auth/login", authLimiter, login)
+apiRouter.post("/auth/refresh", authLimiter, refresh)
+apiRouter.post("/auth/logout", requireAuth, logout)
+apiRouter.get("/auth/me", requireAuth, me)
+apiRouter.post("/auth/activate", authLimiter, activateUser)
+apiRouter.post("/auth/forgot-password", authLimiter, forgotPassword)
+apiRouter.post("/auth/reset-password", authLimiter, resetPassword)
+
+// Admin User Management Endpoints (Super Admin Only)
+apiRouter.get("/users", requireAuth, requireRole("users"), listUsers)
+apiRouter.post("/users/invite", requireAuth, requireRole("users"), inviteUser)
+apiRouter.patch("/users/:id/status", requireAuth, requireRole("users"), updateUserStatus)
+apiRouter.patch("/users/:id/role", requireAuth, requireRole("users"), updateUserRole)
+
+// Public Endpoints
+apiRouter.get("/projects", listProjects)
+apiRouter.get("/projects/:slug", getProjectBySlug)
+apiRouter.get("/team", listTeam)
+apiRouter.get("/services", listServices)
+apiRouter.get("/faqs", listFaqs)
+apiRouter.get("/internships", listInternships)
+apiRouter.get("/jobs", listJobs)
+apiRouter.get("/settings", getSettings)
+apiRouter.get("/cms", getPublicCms)
+
+apiRouter.post("/inquiries", formLimiter, submitInquiry)
+apiRouter.post("/contact", formLimiter, submitInquiry)
+apiRouter.post("/applications", formLimiter, submitApplication)
+apiRouter.post("/chat", chatLimiter, chat)
+
+// Admin CMS Endpoints
+apiRouter.get("/admin/cms", requireAuth, getCms)
+apiRouter.post("/admin/cms", requireAuth, postCms)
+
+// Admin WhatsApp Management Endpoints
+apiRouter.get("/admin/whatsapp/conversations", requireAuth, listConversations)
+apiRouter.get("/admin/whatsapp/conversations/:id", requireAuth, getConversation)
+apiRouter.post("/admin/whatsapp/conversations/:id/message", requireAuth, sendMessage)
+apiRouter.post("/admin/whatsapp/conversations/:id/takeover", requireAuth, takeoverConversation)
+apiRouter.post("/admin/whatsapp/conversations/:id/resume-ai", requireAuth, resumeAi)
+apiRouter.patch("/admin/whatsapp/conversations/:id/lead", requireAuth, updateLead)
+
+// Admin Quotation Archive Endpoints
+apiRouter.get("/admin/quotes", requireAuth, listQuotes)
+apiRouter.post("/admin/quotes", requireAuth, upload.single("file"), uploadQuote)
+apiRouter.get("/admin/quotes/:id", requireAuth, getQuote)
+apiRouter.patch("/admin/quotes/:id", requireAuth, updateQuote)
+apiRouter.delete("/admin/quotes/:id", requireAuth, deleteQuote)
+apiRouter.get("/admin/quotes/:id/view", requireAuth, viewQuotePdf)
+apiRouter.get("/admin/quotes/:id/download", requireAuth, downloadQuotePdf)
+
+// Admin ML Lead Intelligence Endpoints
+apiRouter.get("/admin/ml/status", requireAuth, getMlStatusHandler)
+apiRouter.post("/admin/leads/:id/score", requireAuth, scoreSingleLeadHandler)
+apiRouter.post("/admin/leads/batch-score", requireAuth, rescoreAllOpenLeadsHandler)
+apiRouter.post("/admin/ml/retrain", requireAuth, triggerModelRetrainHandler)
 
 // Olinethra Insights Public Endpoints
 apiRouter.get("/insights", listPublicInsightsHandler)
@@ -147,5 +165,3 @@ apiRouter.delete("/admin/insights/:id", requireAuth, requireRole("insights"), de
 apiRouter.post("/admin/insights/generate", requireAuth, requireRole("insights"), aiGenLimiter, generateDraftHandler)
 apiRouter.post("/admin/insights/generate-tech-brief", requireAuth, requireRole("insights"), aiGenLimiter, generateTechBriefHandler)
 apiRouter.post("/admin/insights/:id/ai-assist", requireAuth, requireRole("insights"), aiGenLimiter, aiAssistHandler)
-
-

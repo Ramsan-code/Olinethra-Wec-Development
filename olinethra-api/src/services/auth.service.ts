@@ -5,19 +5,30 @@ import { AppError } from "../middleware/error.middleware.js"
 import { logActivity } from "./activity.service.js"
 
 export async function authenticateAdmin(email: string, password: string): Promise<AuthUser> {
-  const user = await User.findOne({ email: email.toLowerCase(), isActive: true }).select("+passwordHash")
+  const user = await User.findOne({ email: email.toLowerCase() }).select("+passwordHash")
   if (!user) {
-    throw new AppError(401, "INVALID_CREDENTIALS", "Invalid credentials. Please try again.")
+    throw new AppError(401, "INVALID_CREDENTIALS", "Invalid email or password.")
+  }
+
+  if (!user.isActive || user.status === "DISABLED") {
+    throw new AppError(403, "ACCOUNT_DISABLED", "Your admin account is disabled. Please contact a Super Admin.")
+  }
+
+  if (user.status === "INVITED") {
+    throw new AppError(403, "ACCOUNT_NOT_ACTIVATED", "Your admin account has not been activated yet. Please check your invitation email.")
   }
 
   const valid = await bcrypt.compare(password, user.passwordHash)
   if (!valid) {
-    throw new AppError(401, "INVALID_CREDENTIALS", "Invalid credentials. Please try again.")
+    throw new AppError(401, "INVALID_CREDENTIALS", "Invalid email or password.")
   }
+
+  user.lastLoginAt = new Date()
+  await user.save()
 
   await logActivity({
     user: user.name,
-    action: "Admin Login",
+    action: "ADMIN_LOGIN_SUCCESS",
     entity: "Auth",
     resourceId: user.legacyId,
   })
@@ -31,7 +42,7 @@ export async function authenticateAdmin(email: string, password: string): Promis
 }
 
 export async function getAdminByLegacyId(legacyId: string): Promise<AuthUser | null> {
-  const user = await User.findOne({ legacyId, isActive: true }).lean()
+  const user = await User.findOne({ legacyId, isActive: true, status: "ACTIVE" }).lean()
   if (!user) return null
   return { id: user.legacyId, name: user.name, email: user.email, role: user.role }
 }

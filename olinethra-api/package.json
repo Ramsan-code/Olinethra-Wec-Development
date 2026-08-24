@@ -8,6 +8,7 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "seed": "tsx src/scripts/seed.ts",
+    "admin:create": "tsx src/scripts/createAdmin.ts",
     "lint": "tsc --noEmit",
     "typecheck": "tsc --noEmit",
     "test": "MONGODB_URI=mongodb://127.0.0.1:27017/olinethra-test JWT_ACCESS_SECRET=test-access-secret-000000 JWT_REFRESH_SECRET=test-refresh-secret-00000 vitest run"

@@ -71,7 +71,7 @@ export default function GameResult({
               Explore Olinethra mentorship internships & software engineering roles.
             </p>
             <Link
-              href="/#careers"
+              href="/careers"
               className="inline-flex items-center gap-1 font-mono text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline"
             >
               <span>Explore Olinethra Careers</span>
@@ -90,7 +90,7 @@ export default function GameResult({
               Olinethra builds fast, thoughtful digital platforms and software products.
             </p>
             <Link
-              href="/#projects"
+              href="/projects"
               className="inline-flex items-center gap-1 font-mono text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline"
             >
               <span>See Our Production Work</span>

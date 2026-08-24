@@ -1,6 +1,8 @@
 import { Schema, model } from "mongoose"
 import type { AdminRole } from "../types/index.js"
 
+export type AdminStatus = "ACTIVE" | "INVITED" | "DISABLED"
+
 export interface IUser {
   legacyId: string
   name: string
@@ -8,6 +10,13 @@ export interface IUser {
   passwordHash: string
   role: AdminRole
   isActive: boolean
+  status: AdminStatus
+  inviteToken?: string
+  inviteTokenExpires?: Date
+  resetToken?: string
+  resetTokenExpires?: Date
+  lastLoginAt?: Date
+  createdBy?: string
 }
 
 const userSchema = new Schema<IUser>(
@@ -22,6 +31,17 @@ const userSchema = new Schema<IUser>(
       required: true,
     },
     isActive: { type: Boolean, default: true },
+    status: {
+      type: String,
+      enum: ["ACTIVE", "INVITED", "DISABLED"],
+      default: "ACTIVE",
+    },
+    inviteToken: { type: String, select: false },
+    inviteTokenExpires: { type: Date },
+    resetToken: { type: String, select: false },
+    resetTokenExpires: { type: Date },
+    lastLoginAt: { type: Date },
+    createdBy: { type: String },
   },
   { timestamps: true }
 )

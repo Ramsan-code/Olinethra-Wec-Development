@@ -71,7 +71,7 @@ export default function AudienceCtaCard({ postId, audience }: AudienceCtaCardPro
 
           <div className="flex flex-wrap justify-center items-center gap-4 pt-2">
             <Link
-              href="/#contact"
+              href="/contact"
               onClick={handleCtaClick}
               className="inline-flex items-center gap-2 rounded-xl bg-neutral-950 px-6 py-3 font-mono text-xs font-bold text-white transition-all hover:bg-neutral-800 dark:bg-neutral-50 dark:text-neutral-950 dark:hover:bg-neutral-200"
             >
@@ -80,7 +80,7 @@ export default function AudienceCtaCard({ postId, audience }: AudienceCtaCardPro
             </Link>
 
             <Link
-              href="/#services"
+              href="/services"
               onClick={handleCtaClick}
               className="inline-flex items-center gap-2 rounded-xl border border-neutral-300 bg-white px-6 py-3 font-mono text-xs font-bold text-neutral-800 transition-all hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800"
             >
@@ -107,7 +107,7 @@ export default function AudienceCtaCard({ postId, audience }: AudienceCtaCardPro
 
           <div className="flex flex-wrap justify-center items-center gap-4 pt-2">
             <Link
-              href="/#internships"
+              href="/careers"
               onClick={handleCtaClick}
               className="inline-flex items-center gap-2 rounded-xl bg-neutral-950 px-6 py-3 font-mono text-xs font-bold text-white transition-all hover:bg-neutral-800 dark:bg-neutral-50 dark:text-neutral-950 dark:hover:bg-neutral-200"
             >
@@ -116,7 +116,7 @@ export default function AudienceCtaCard({ postId, audience }: AudienceCtaCardPro
             </Link>
 
             <Link
-              href="/#jobs"
+              href="/careers"
               onClick={handleCtaClick}
               className="inline-flex items-center gap-2 rounded-xl border border-neutral-300 bg-white px-6 py-3 font-mono text-xs font-bold text-neutral-800 transition-all hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800"
             >

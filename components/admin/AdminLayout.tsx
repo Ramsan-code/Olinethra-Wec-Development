@@ -52,6 +52,7 @@ const navItems = [
   { href: "/admin/inquiries", label: "Project Inquiries", icon: MessageSquare },
   { href: "/admin/quotes", label: "Quotation Archive", icon: FileText },
   { href: "/admin/analytics/ml", label: "Lead Intelligence ML", icon: Brain },
+  { href: "/admin/users", label: "Admin Users", icon: ShieldCheck },
   { href: "/admin/media", label: "Media Library", icon: ImageIcon },
   { href: "/admin/settings", label: "Site Settings", icon: Settings },
 ]

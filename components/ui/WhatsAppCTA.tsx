@@ -64,9 +64,9 @@ export function WhatsAppCTA({
     )
   }
 
-  // Floating Bottom-Right Widget
+  // Floating Bottom-Left Widget
   return (
-    <div className={`fixed bottom-6 right-6 z-50 ${className}`}>
+    <div className={`fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-50 ${className}`}>
       {open && (
         <div className="mb-3 w-72 sm:w-80 rounded-2xl border border-neutral-200 bg-white p-4 shadow-2xl transition-all animate-in fade-in slide-in-from-bottom-2 dark:border-neutral-800 dark:bg-neutral-900">
           <div className="flex items-center justify-between border-b border-neutral-100 pb-3 dark:border-neutral-800">
