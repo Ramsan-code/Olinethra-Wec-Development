@@ -22,6 +22,7 @@ import {
   X,
   Code2,
   ShieldCheck,
+  PhoneCall,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
@@ -35,6 +36,7 @@ interface AdminUser {
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/whatsapp", label: "WhatsApp Agent", icon: PhoneCall },
   { href: "/admin/projects", label: "Portfolio / Work", icon: FolderGit2 },
   { href: "/admin/team", label: "Team Members", icon: Users },
   { href: "/admin/services", label: "Services", icon: Layers },
@@ -47,6 +49,7 @@ const navItems = [
   { href: "/admin/media", label: "Media Library", icon: ImageIcon },
   { href: "/admin/settings", label: "Site Settings", icon: Settings },
 ]
+
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()

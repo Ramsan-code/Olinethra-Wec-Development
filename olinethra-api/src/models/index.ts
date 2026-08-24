@@ -12,3 +12,7 @@ export { Notification } from "./Notification.js"
 export { ActivityLog } from "./ActivityLog.js"
 export { ChatbotKnowledge } from "./ChatbotKnowledge.js"
 export { SiteSettings } from "./SiteSettings.js"
+export { Lead } from "./Lead.js"
+export { Conversation } from "./Conversation.js"
+export { Message } from "./Message.js"
+

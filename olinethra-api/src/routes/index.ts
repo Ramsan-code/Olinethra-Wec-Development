@@ -18,9 +18,26 @@ import {
 import { requireAuth } from "../middleware/auth.middleware.js"
 import { authLimiter, chatLimiter, formLimiter } from "../middleware/rateLimit.middleware.js"
 
+import {
+  verifyWebhook,
+  handleWebhook,
+  listConversations,
+  getConversation,
+  sendMessage,
+  takeoverConversation,
+  resumeAi,
+  updateLead,
+  listLeads,
+  getInsights,
+} from "../controllers/whatsapp.controller.js"
+
 export const apiRouter = Router()
 
 apiRouter.get("/health", health)
+
+// Official WhatsApp Webhook endpoints
+apiRouter.get("/webhooks/whatsapp", verifyWebhook)
+apiRouter.post("/webhooks/whatsapp", handleWebhook)
 
 apiRouter.post("/auth/login", authLimiter, login)
 apiRouter.post("/auth/refresh", authLimiter, refresh)
@@ -46,3 +63,14 @@ apiRouter.post("/chat", chatLimiter, chat)
 // service layer persists each entity in its own MongoDB collection.
 apiRouter.get("/admin/cms", requireAuth, getCms)
 apiRouter.post("/admin/cms", requireAuth, postCms)
+
+// Admin WhatsApp Management Endpoints
+apiRouter.get("/admin/whatsapp/conversations", requireAuth, listConversations)
+apiRouter.get("/admin/whatsapp/conversations/:id", requireAuth, getConversation)
+apiRouter.post("/admin/whatsapp/conversations/:id/message", requireAuth, sendMessage)
+apiRouter.post("/admin/whatsapp/conversations/:id/takeover", requireAuth, takeoverConversation)
+apiRouter.post("/admin/whatsapp/conversations/:id/resume-ai", requireAuth, resumeAi)
+apiRouter.patch("/admin/whatsapp/conversations/:id/lead", requireAuth, updateLead)
+apiRouter.get("/admin/whatsapp/leads", requireAuth, listLeads)
+apiRouter.get("/admin/whatsapp/insights", requireAuth, getInsights)
+
