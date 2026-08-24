@@ -12,28 +12,36 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Zap,
 }
 
-export default function ServicesSection() {
+interface ServicesSectionProps {
+  isHomepage?: boolean
+}
+
+export default function ServicesSection({ isHomepage = false }: ServicesSectionProps) {
+  const displayServices = isHomepage ? servicesData.slice(0, 4) : servicesData
+
   return (
     <section id="services" className="border-b border-neutral-200 bg-white py-16 sm:py-24 dark:border-neutral-800 dark:bg-neutral-950">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Title Header */}
-        <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end mb-12 sm:mb-16">
+        <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
           <div>
             <span className="font-mono text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
               [ OUR CAPABILITIES ]
             </span>
             <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-neutral-950 dark:text-neutral-50">
-              Services & Technical Solutions
+              {isHomepage ? "What We Build & Engineer" : "Services & Technical Solutions"}
             </h2>
           </div>
           <p className="max-w-md text-sm text-neutral-600 dark:text-neutral-400">
-            End-to-end engineering and design capabilities tailored to deliver measurable business outcomes and long-term scalability.
+            {isHomepage
+              ? "A high-level overview of our core development capabilities and digital software solutions."
+              : "End-to-end engineering and design capabilities tailored to deliver measurable business outcomes and long-term scalability."}
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {servicesData.map((service: ServiceItem) => {
+        <div className={`grid grid-cols-1 sm:grid-cols-2 ${isHomepage ? "lg:grid-cols-4" : "lg:grid-cols-3"} gap-6 sm:gap-8`}>
+          {displayServices.map((service: ServiceItem) => {
             const Icon = iconMap[service.iconName] || Code2
             return (
               <div
@@ -56,22 +64,24 @@ export default function ServicesSection() {
                   <h3 className="text-xl font-bold text-neutral-950 dark:text-neutral-50 mb-3 group-hover:text-neutral-900 dark:group-hover:text-white">
                     {service.title}
                   </h3>
-                  <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 mb-6">
+                  <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 mb-4">
                     {service.shortDesc}
                   </p>
 
-                  {/* Features List */}
-                  <ul className="space-y-2 border-t border-neutral-100 pt-4 dark:border-neutral-800/80">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-xs text-neutral-700 dark:text-neutral-300">
-                        <Check className="h-3.5 w-3.5 shrink-0 text-neutral-900 dark:text-neutral-100" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Features List (Only on full page) */}
+                  {!isHomepage && (
+                    <ul className="space-y-2 border-t border-neutral-100 pt-4 dark:border-neutral-800/80">
+                      {service.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-center gap-2 text-xs text-neutral-700 dark:text-neutral-300">
+                          <Check className="h-3.5 w-3.5 shrink-0 text-neutral-900 dark:text-neutral-100" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
 
-                <div className="mt-8 pt-4 border-t border-neutral-100 dark:border-neutral-800">
+                <div className="mt-6 pt-4 border-t border-neutral-100 dark:border-neutral-800">
                   <Button asChild variant="ghost" size="sm" className="w-full justify-between px-0 font-medium text-neutral-900 hover:bg-transparent dark:text-neutral-100">
                     <Link href={`/services#${service.id}`}>
                       <span>Learn More</span>
@@ -83,6 +93,17 @@ export default function ServicesSection() {
             )
           })}
         </div>
+
+        {isHomepage && (
+          <div className="text-center pt-4">
+            <Button asChild variant="outline" className="rounded-lg px-6 py-5 font-mono text-xs font-bold border-neutral-300 dark:border-neutral-700">
+              <Link href="/services" className="flex items-center gap-2">
+                <span>Explore All Technical Capabilities &amp; Services</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   )
