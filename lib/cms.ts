@@ -115,6 +115,25 @@ export interface ChatbotKnowledgeItem {
   lastUpdated: string
 }
 
+export interface LocationSettings {
+  name: string
+  addressLine1?: string
+  addressLine2?: string
+  city?: string
+  region?: string
+  postalCode?: string
+  country: string
+  latitude?: number
+  longitude?: number
+  placeId?: string
+  googleMapsUrl?: string
+  zoom: number
+  showMap: boolean
+  showAddress: boolean
+  showDirections: boolean
+  note?: string
+}
+
 export interface SiteSettings {
   heroHeading: string
   heroSubheading: string
@@ -131,7 +150,9 @@ export interface SiteSettings {
   facebookUrl?: string
   instagramUrl?: string
   youtubeUrl?: string
+  location?: LocationSettings
 }
+
 
 export interface ApplicationItem {
   id: string
@@ -361,7 +382,26 @@ function getSeedData(): CmsStore {
       facebookUrl: "https://facebook.com/olinethra",
       instagramUrl: "https://instagram.com/olinethra",
       youtubeUrl: "https://youtube.com/@olinethra",
+      location: {
+        name: "Olinethra",
+        addressLine1: "Kandy Road",
+        addressLine2: "",
+        city: "Vavuniya",
+        region: "Northern Province",
+        postalCode: "43000",
+        country: "Sri Lanka",
+        latitude: 8.7514,
+        longitude: 80.4971,
+        placeId: "",
+        googleMapsUrl: "https://maps.google.com/?q=8.7514,80.4971",
+        zoom: 14,
+        showMap: true,
+        showAddress: true,
+        showDirections: true,
+        note: "Visitors by appointment only.",
+      },
     },
+
 
     applications: [
       {

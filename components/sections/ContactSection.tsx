@@ -1,11 +1,13 @@
 "use client"
 
 import * as React from "react"
-import { Mail, Phone, MapPin, Send, CheckCircle2 } from "lucide-react"
+import { Mail, Phone, MapPin, Send, CheckCircle2, Navigation, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
+import { SiteSettings, CmsStore } from "@/lib/cms"
+import CompanyMap from "@/components/maps/CompanyMap"
 
 const projectTypes = [
   "Web Application",
@@ -17,6 +19,7 @@ const projectTypes = [
 ]
 
 export default function ContactSection() {
+  const [settings, setSettings] = React.useState<SiteSettings | null>(null)
   const [formData, setFormData] = React.useState({
     name: "",
     email: "",
@@ -25,6 +28,16 @@ export default function ContactSection() {
     budget: "$5k - $15k",
     message: "",
   })
+
+  React.useEffect(() => {
+    fetch("/api/admin/cms")
+      .then((res) => res.json())
+      .then((data: CmsStore) => {
+        if (data?.siteSettings) setSettings(data.siteSettings)
+      })
+      .catch(() => {})
+  }, [])
+
 
   const [errors, setErrors] = React.useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = React.useState(false)
@@ -91,8 +104,8 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-500">Email Address</h4>
-                  <a href="mailto:hello@olinethra.com" className="text-base font-bold text-neutral-950 hover:underline dark:text-neutral-50">
-                    hello@olinethra.com
+                  <a href={`mailto:${settings?.contactEmail || "hello@olinethra.com"}`} className="text-base font-bold text-neutral-950 hover:underline dark:text-neutral-50">
+                    {settings?.contactEmail || "hello@olinethra.com"}
                   </a>
                 </div>
               </div>
@@ -104,7 +117,7 @@ export default function ContactSection() {
                 <div>
                   <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-500">Phone</h4>
                   <p className="text-base font-bold text-neutral-950 dark:text-neutral-50">
-                    +1 (555) 019-2834
+                    {settings?.contactPhone || "+1 (555) 019-2834"}
                   </p>
                 </div>
               </div>
@@ -114,14 +127,39 @@ export default function ContactSection() {
                   <MapPin className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-500">HQ &amp; Workspace</h4>
+                  <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-500">
+                    {settings?.location?.name || "Olinethra"} Location
+                  </h4>
                   <p className="text-base font-bold text-neutral-950 dark:text-neutral-50">
-                    San Francisco, CA &amp; Global Remote
+                    {settings?.location?.addressLine1 ? `${settings.location.addressLine1}, ` : ""}
+                    {settings?.location?.city || "Vavuniya"}, {settings?.location?.country || "Sri Lanka"}
                   </p>
+                  {settings?.location?.showDirections !== false && (
+                    <a
+                      href={
+                        settings?.location?.googleMapsUrl ||
+                        `https://maps.google.com/?q=${settings?.location?.latitude || 8.7514},${settings?.location?.longitude || 80.4971}`
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-1 inline-flex items-center gap-1 text-xs font-mono font-bold text-neutral-900 underline hover:text-neutral-600 dark:text-neutral-100 dark:hover:text-neutral-400"
+                    >
+                      <span>View on Google Maps</span>
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+                  )}
                 </div>
               </div>
+
+              {/* Interactive Google Map */}
+              {settings?.location?.showMap !== false && (
+                <div className="pt-2">
+                  <CompanyMap location={settings?.location} height="h-[280px] sm:h-[340px]" />
+                </div>
+              )}
             </div>
           </div>
+
 
           {/* Form Area (7 columns) */}
           <div className="lg:col-span-7">

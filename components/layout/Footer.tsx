@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Code2, Mail } from "lucide-react"
+import { Code2, Mail, MapPin, ExternalLink } from "lucide-react"
 import {
   GithubIcon,
   LinkedinIcon,
@@ -72,7 +72,29 @@ export default function Footer() {
               {settings?.footerTagline ||
                 "Olinethra is a full-stack web development agency and software studio. We design, architect, and build modern digital experiences, web applications, and enterprise software solutions."}
             </p>
+
+            {/* Compact Location Line */}
+            <div className="inline-flex items-center gap-2 rounded-lg border border-neutral-800 bg-neutral-900/80 px-3 py-1.5 text-xs text-neutral-300">
+              <MapPin className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+              <span className="font-mono text-neutral-300">
+                {settings?.location?.city || "Vavuniya"}, {settings?.location?.country || "Sri Lanka"}
+              </span>
+              <a
+                href={
+                  settings?.location?.googleMapsUrl ||
+                  `https://maps.google.com/?q=${settings?.location?.latitude || 8.7514},${settings?.location?.longitude || 80.4971}`
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 text-[11px] font-mono text-white underline hover:text-emerald-400 inline-flex items-center gap-0.5"
+              >
+                <span>View Map</span>
+                <ExternalLink className="h-3 w-3" />
+              </a>
+            </div>
+
             <div className="flex flex-wrap items-center gap-3 pt-2">
+
               {socialLinks.map((item) => {
                 const IconComponent = item.icon
                 return (

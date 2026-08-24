@@ -81,7 +81,31 @@ export async function processWhatsAppMessage(
     }
   }
 
+  // Location Inquiry
+  if (
+    lower.includes("location") ||
+    lower.includes("address") ||
+    lower.includes("office") ||
+    lower.includes("where are you") ||
+    lower.includes("where is your office") ||
+    lower.includes("map") ||
+    lower.includes("directions")
+  ) {
+    const loc = (cms.siteSettings as Record<string, any>)?.location
+    const locName = loc?.name || "Olinethra"
+    const city = loc?.city || "Vavuniya"
+    const country = loc?.country || "Sri Lanka"
+    const addr1 = loc?.addressLine1 ? `${loc.addressLine1}, ` : ""
+    const mapsUrl = loc?.googleMapsUrl || `https://maps.google.com/?q=${loc?.latitude || 8.7514},${loc?.longitude || 80.4971}`
+
+    return {
+      reply: `📍 **${locName} Office Location:**\n${addr1}${city}, ${country}\n\nGoogle Maps & Directions:\n${mapsUrl}`,
+      intent: "LOCATION",
+    }
+  }
+
   // 3. Careers / Internships / Jobs (Option 4 / 5 or keyword)
+
   if (
     lower === "4" ||
     lower === "5" ||

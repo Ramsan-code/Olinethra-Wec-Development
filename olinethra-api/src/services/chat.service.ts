@@ -63,7 +63,30 @@ export async function handleChat(messages: ChatMessage[]): Promise<ChatResponse>
     }
   }
 
+  if (
+    lowerMessage.includes("location") ||
+    lowerMessage.includes("address") ||
+    lowerMessage.includes("where are you") ||
+    lowerMessage.includes("where is your office") ||
+    lowerMessage.includes("office location") ||
+    lowerMessage.includes("map") ||
+    lowerMessage.includes("directions")
+  ) {
+    const loc = (cms.siteSettings as Record<string, any>)?.location
+    const locName = loc?.name || "Olinethra"
+    const city = loc?.city || "Vavuniya"
+    const country = loc?.country || "Sri Lanka"
+    const addr1 = loc?.addressLine1 ? `${loc.addressLine1}, ` : ""
+    const mapsUrl = loc?.googleMapsUrl || `https://maps.google.com/?q=${loc?.latitude || 8.7514},${loc?.longitude || 80.4971}`
+
+    return {
+      response: `📍 **${locName} Location:**\n${addr1}${city}, ${country}\n\nVisit us or get directions: ${mapsUrl}`,
+      suggestedAction: { text: "Open in Google Maps →", href: mapsUrl },
+    }
+  }
+
   if (lowerMessage.includes("internship") || lowerMessage.includes("intern") || lowerMessage.includes("hiring")) {
+
     const activeInternships = cms.internships.filter((i) => i.status === "Open")
     const activeJobs = cms.jobs.filter((j) => j.status === "Open")
 

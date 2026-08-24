@@ -82,7 +82,26 @@ export async function buildCmsExport(): Promise<CmsExport> {
     githubUrl: "https://github.com/olinethra",
     linkedinUrl: "https://linkedin.com/company/olinethra",
     twitterUrl: "https://twitter.com/olinethra",
+    location: {
+      name: "Olinethra",
+      addressLine1: "Kandy Road",
+      addressLine2: "",
+      city: "Vavuniya",
+      region: "Northern Province",
+      postalCode: "43000",
+      country: "Sri Lanka",
+      latitude: 8.7514,
+      longitude: 80.4971,
+      placeId: "",
+      googleMapsUrl: "https://maps.google.com/?q=8.7514,80.4971",
+      zoom: 14,
+      showMap: true,
+      showAddress: true,
+      showDirections: true,
+      note: "Visitors by appointment only.",
+    },
   }
+
 
   const siteSettings = siteSettingsDoc
     ? (({ key, _id, __v, ...rest }) => rest)(siteSettingsDoc as Record<string, unknown>)
@@ -134,12 +153,24 @@ const writableFields: Record<EntityName | "settings", readonly string[]> = {
   applications: ["status"],
   inquiries: ["status", "priority"],
   notifications: ["read"],
-  settings: ["heroHeading", "heroSubheading", "heroBadgeText", "aboutHeading", "aboutDescription", "contactEmail", "contactPhone", "contactAddress", "footerTagline", "githubUrl", "linkedinUrl", "twitterUrl", "facebookUrl", "instagramUrl", "youtubeUrl"],
+  settings: ["heroHeading", "heroSubheading", "heroBadgeText", "aboutHeading", "aboutDescription", "contactEmail", "contactPhone", "contactAddress", "footerTagline", "githubUrl", "linkedinUrl", "twitterUrl", "facebookUrl", "instagramUrl", "youtubeUrl", "location"],
 }
 
 export function pickWritableFields(entity: EntityName | "settings", data: Record<string, unknown>) {
   const allowed = new Set(writableFields[entity])
   return Object.fromEntries(Object.entries(data).filter(([key]) => allowed.has(key)))
+}
+
+export function validateLocationData(location: Record<string, unknown>) {
+  if (typeof location.latitude === "number" && (location.latitude < -90 || location.latitude > 90)) {
+    throw new AppError(400, "INVALID_LOCATION", "Latitude must be between -90 and 90.")
+  }
+  if (typeof location.longitude === "number" && (location.longitude < -180 || location.longitude > 180)) {
+    throw new AppError(400, "INVALID_LOCATION", "Longitude must be between -180 and 180.")
+  }
+  if (typeof location.zoom === "number" && (location.zoom < 1 || location.zoom > 21)) {
+    throw new AppError(400, "INVALID_LOCATION", "Zoom must be between 1 and 21.")
+  }
 }
 
 export async function handleLegacyCmsAction(
@@ -159,6 +190,10 @@ export async function handleLegacyCmsAction(
   }
 
   if (action === "updateSettings" && data) {
+    if (data.location && typeof data.location === "object") {
+      validateLocationData(data.location as Record<string, unknown>)
+    }
+
     const settingsData = pickWritableFields("settings", data)
     const updated = await SiteSettings.findOneAndUpdate(
       { key: "default" },
@@ -168,13 +203,14 @@ export async function handleLegacyCmsAction(
 
     await logActivity({
       user: admin.name,
-      action: "Updated Global Site Settings",
+      action: "Updated Global Site Settings & Company Location",
       entity: "Settings",
     })
 
     const { key: _k, _id: _i, __v: _v, ...rest } = updated as Record<string, unknown>
     return { success: true, data: rest }
   }
+
 
   if (!entity || !(entity in entityModelMap)) {
     throw new AppError(400, "INVALID_ACTION", "Invalid action or entity.")
