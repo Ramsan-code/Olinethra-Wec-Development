@@ -5,6 +5,7 @@ import ServicesSection from "@/components/sections/ServicesSection"
 import TechnologiesSection from "@/components/sections/TechnologiesSection"
 import ProjectsSection from "@/components/sections/ProjectsSection"
 import InsightsSection from "@/components/sections/InsightsSection"
+import PlaygroundSection from "@/components/sections/PlaygroundSection"
 import ProcessSection from "@/components/sections/ProcessSection"
 import TeamSection from "@/components/sections/TeamSection"
 import CareersSection from "@/components/sections/CareersSection"
@@ -24,6 +25,7 @@ export default function Home() {
         <TechnologiesSection />
         <ProjectsSection />
         <InsightsSection />
+        <PlaygroundSection />
         <ProcessSection />
         <TeamSection />
         <CareersSection />
