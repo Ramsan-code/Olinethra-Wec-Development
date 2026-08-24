@@ -104,3 +104,48 @@ apiRouter.post("/admin/leads/:id/score", requireAuth, scoreSingleLeadHandler)
 apiRouter.post("/admin/leads/batch-score", requireAuth, rescoreAllOpenLeadsHandler)
 apiRouter.post("/admin/ml/retrain", requireAuth, triggerModelRetrainHandler)
 
+import {
+  listPublicInsightsHandler,
+  getPublicInsightBySlugHandler,
+  getCategoriesHandler,
+  trackCtaClickHandler,
+  listAdminInsightsHandler,
+  getAdminInsightByIdHandler,
+  createInsightHandler,
+  updateInsightHandler,
+  publishInsightHandler,
+  unpublishInsightHandler,
+  archiveInsightHandler,
+  deleteInsightHandler,
+  createCategoryHandler,
+  generateDraftHandler,
+  generateTechBriefHandler,
+  aiAssistHandler,
+} from "../controllers/insights.controller.js"
+import { requireRole } from "../middleware/role.middleware.js"
+import { aiGenLimiter } from "../middleware/rateLimit.middleware.js"
+
+// Olinethra Insights Public Endpoints
+apiRouter.get("/insights", listPublicInsightsHandler)
+apiRouter.get("/insights/categories", getCategoriesHandler)
+apiRouter.get("/insights/:slug", getPublicInsightBySlugHandler)
+apiRouter.post("/insights/:id/cta-click", trackCtaClickHandler)
+
+// Olinethra Insights Admin Endpoints
+apiRouter.get("/admin/insights", requireAuth, requireRole("insights"), listAdminInsightsHandler)
+apiRouter.get("/admin/insights/categories", requireAuth, getCategoriesHandler)
+apiRouter.post("/admin/insights/categories", requireAuth, requireRole("insights"), createCategoryHandler)
+apiRouter.get("/admin/insights/:id", requireAuth, requireRole("insights"), getAdminInsightByIdHandler)
+apiRouter.post("/admin/insights", requireAuth, requireRole("insights"), createInsightHandler)
+apiRouter.patch("/admin/insights/:id", requireAuth, requireRole("insights"), updateInsightHandler)
+apiRouter.post("/admin/insights/:id/publish", requireAuth, requireRole("insights"), publishInsightHandler)
+apiRouter.post("/admin/insights/:id/unpublish", requireAuth, requireRole("insights"), unpublishInsightHandler)
+apiRouter.post("/admin/insights/:id/archive", requireAuth, requireRole("insights"), archiveInsightHandler)
+apiRouter.delete("/admin/insights/:id", requireAuth, requireRole("insights"), deleteInsightHandler)
+
+// Admin Gemini Content Generation & AI Assist Endpoints
+apiRouter.post("/admin/insights/generate", requireAuth, requireRole("insights"), aiGenLimiter, generateDraftHandler)
+apiRouter.post("/admin/insights/generate-tech-brief", requireAuth, requireRole("insights"), aiGenLimiter, generateTechBriefHandler)
+apiRouter.post("/admin/insights/:id/ai-assist", requireAuth, requireRole("insights"), aiGenLimiter, aiAssistHandler)
+
+

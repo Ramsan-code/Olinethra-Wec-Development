@@ -15,6 +15,6 @@ export { SiteSettings } from "./SiteSettings.js"
 export { Lead } from "./Lead.js"
 export { Conversation } from "./Conversation.js"
 export { Message } from "./Message.js"
+export { InsightCategory, type IInsightCategory } from "./InsightCategory.js"
+export { InsightPost, type IInsightPost } from "./InsightPost.js"
 export { Quote } from "./Quote.js"
-
-

@@ -24,6 +24,7 @@ import {
   ShieldCheck,
   PhoneCall,
   Brain,
+  BookOpen,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -38,6 +39,7 @@ interface AdminUser {
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/insights", label: "Olinethra Insights", icon: BookOpen },
   { href: "/admin/whatsapp", label: "WhatsApp Agent", icon: PhoneCall },
   { href: "/admin/projects", label: "Portfolio / Work", icon: FolderGit2 },
   { href: "/admin/team", label: "Team Members", icon: Users },

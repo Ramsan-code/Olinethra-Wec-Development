@@ -17,6 +17,7 @@ type Permission =
   | "notifications"
   | "analytics"
   | "users"
+  | "insights"
 
 const rolePermissions: Record<AdminRole, Permission[] | "*"> = {
   "Super Admin": "*",
@@ -29,6 +30,7 @@ const rolePermissions: Record<AdminRole, Permission[] | "*"> = {
     "chatbot",
     "notifications",
     "analytics",
+    "insights",
   ],
   "Hiring Admin": ["internships", "jobs", "applications", "notifications", "analytics"],
 }

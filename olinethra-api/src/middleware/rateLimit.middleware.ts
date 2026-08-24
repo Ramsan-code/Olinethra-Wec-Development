@@ -44,3 +44,15 @@ export const formLimiter = rateLimit({
     error: { code: "RATE_LIMIT", message: "Too many form submissions." },
   },
 })
+
+export const aiGenLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    success: false,
+    error: { code: "RATE_LIMIT", message: "Too many AI generation requests. Please try again in 15 minutes." },
+  },
+})
+
