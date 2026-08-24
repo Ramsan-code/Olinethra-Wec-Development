@@ -46,9 +46,11 @@ const navItems = [
   { href: "/admin/chatbot", label: "Chatbot Knowledge", icon: Bot },
   { href: "/admin/applications", label: "Applications", icon: FileText },
   { href: "/admin/inquiries", label: "Project Inquiries", icon: MessageSquare },
+  { href: "/admin/quotes", label: "Quotation Archive", icon: FileText },
   { href: "/admin/media", label: "Media Library", icon: ImageIcon },
   { href: "/admin/settings", label: "Site Settings", icon: Settings },
 ]
+
 
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

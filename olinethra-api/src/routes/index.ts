@@ -71,6 +71,23 @@ apiRouter.post("/admin/whatsapp/conversations/:id/message", requireAuth, sendMes
 apiRouter.post("/admin/whatsapp/conversations/:id/takeover", requireAuth, takeoverConversation)
 apiRouter.post("/admin/whatsapp/conversations/:id/resume-ai", requireAuth, resumeAi)
 apiRouter.patch("/admin/whatsapp/conversations/:id/lead", requireAuth, updateLead)
-apiRouter.get("/admin/whatsapp/leads", requireAuth, listLeads)
-apiRouter.get("/admin/whatsapp/insights", requireAuth, getInsights)
+import {
+  uploadQuote,
+  listQuotes,
+  getQuote,
+  updateQuote,
+  deleteQuote,
+  viewQuotePdf,
+  downloadQuotePdf,
+} from "../controllers/quote.controller.js"
+import { upload } from "../middleware/upload.middleware.js"
+
+// Admin Quotation Archive Endpoints
+apiRouter.get("/admin/quotes", requireAuth, listQuotes)
+apiRouter.post("/admin/quotes", requireAuth, upload.single("file"), uploadQuote)
+apiRouter.get("/admin/quotes/:id", requireAuth, getQuote)
+apiRouter.patch("/admin/quotes/:id", requireAuth, updateQuote)
+apiRouter.delete("/admin/quotes/:id", requireAuth, deleteQuote)
+apiRouter.get("/admin/quotes/:id/view", requireAuth, viewQuotePdf)
+apiRouter.get("/admin/quotes/:id/download", requireAuth, downloadQuotePdf)
 
