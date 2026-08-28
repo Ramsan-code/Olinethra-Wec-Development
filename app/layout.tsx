@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
+import Script from "next/script"
 import "./globals.css"
 
 const geistSans = Geist({
@@ -11,6 +12,9 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 })
+
+const analyticsId = process.env.NEXT_PUBLIC_ANALYTICS_ID
+const analyticsEnabled = Boolean(analyticsId && /^G-[A-Z0-9]+$/.test(analyticsId))
 
 export const viewport: Viewport = {
   themeColor: "#0a0a0a",
@@ -82,7 +86,22 @@ export default function RootLayout({
         <Chatbot />
         <WhatsAppCTA variant="floating" />
       </body>
+      {analyticsEnabled && (
+        <>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`}
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', ${JSON.stringify(analyticsId)});
+            `}
+          </Script>
+        </>
+      )}
     </html>
   )
 }
-
