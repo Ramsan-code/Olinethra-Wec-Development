@@ -3,6 +3,8 @@ import type { Request, Response, NextFunction } from "express"
 import { env } from "../config/env.js"
 import type { AuthUser } from "../types/index.js"
 import { AppError } from "./error.middleware.js"
+import crypto from "node:crypto"
+import { User } from "../models/User.js"
 
 export const SESSION_COOKIE_NAME = "olinethra_admin_session"
 export const REFRESH_COOKIE_NAME = "olinethra_admin_refresh"
@@ -22,6 +24,11 @@ interface TokenPayload {
   role: AuthUser["role"]
 }
 
+interface RefreshTokenPayload {
+  sub: string
+  jti: string
+}
+
 export function signAccessToken(user: AuthUser): string {
   return jwt.sign(
     { sub: user.id, name: user.name, email: user.email, role: user.role },
@@ -30,8 +37,8 @@ export function signAccessToken(user: AuthUser): string {
   )
 }
 
-export function signRefreshToken(user: AuthUser): string {
-  return jwt.sign({ sub: user.id }, env.JWT_REFRESH_SECRET, {
+export function signRefreshToken(user: AuthUser, jti: string): string {
+  return jwt.sign({ sub: user.id, jti }, env.JWT_REFRESH_SECRET, {
     expiresIn: env.JWT_REFRESH_EXPIRES as jwt.SignOptions["expiresIn"],
   })
 }
@@ -40,9 +47,11 @@ export function verifyAccessToken(token: string): TokenPayload {
   return jwt.verify(token, env.JWT_ACCESS_SECRET) as TokenPayload
 }
 
-export function setAuthCookies(res: Response, user: AuthUser) {
+export async function setAuthCookies(res: Response, user: AuthUser) {
   const accessToken = signAccessToken(user)
-  const refreshToken = signRefreshToken(user)
+  const jti = crypto.randomBytes(32).toString("base64url")
+  const refreshToken = signRefreshToken(user, jti)
+  await User.updateOne({ legacyId: user.id }, { $set: { refreshTokenHash: hashRefreshTokenId(jti) } })
 
   const cookieOptions = {
     httpOnly: true,
@@ -60,6 +69,20 @@ export function setAuthCookies(res: Response, user: AuthUser) {
     ...cookieOptions,
     maxAge: 7 * 24 * 60 * 60 * 1000,
   })
+}
+
+export function verifyRefreshToken(token: string): RefreshTokenPayload {
+  return jwt.verify(token, env.JWT_REFRESH_SECRET) as RefreshTokenPayload
+}
+
+export function hashRefreshTokenId(jti: string) {
+  return crypto.createHash("sha256").update(jti).digest("hex")
+}
+
+export function refreshTokenMatches(actualHash: string, expectedHash: string) {
+  const actual = Buffer.from(actualHash)
+  const expected = Buffer.from(expectedHash)
+  return actual.length === expected.length && crypto.timingSafeEqual(actual, expected)
 }
 
 export function clearAuthCookies(res: Response) {

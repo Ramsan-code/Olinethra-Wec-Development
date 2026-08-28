@@ -52,21 +52,16 @@ export async function inviteUser(req: Request, res: Response, next: NextFunction
       throw new AppError(400, "USER_EXISTS", "An administrator with this email address already exists.")
     }
 
-    const inviteToken = crypto.randomBytes(32).toString("hex")
-    const inviteTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 hours
     const legacyId = `usr_${Date.now()}`
-    const placeholderHash = await hashPassword(crypto.randomBytes(16).toString("hex"))
 
     const user = new User({
       legacyId,
       name,
       email: normalizedEmail,
-      passwordHash: placeholderHash,
       role,
       isActive: true,
-      status: "INVITED",
-      inviteToken,
-      inviteTokenExpires,
+      status: "ACTIVE",
+      authProvider: "GOOGLE",
       createdBy: req.user?.id,
     })
 
@@ -74,17 +69,15 @@ export async function inviteUser(req: Request, res: Response, next: NextFunction
 
     await logActivity({
       user: req.user?.name || "System",
-      action: "ADMIN_INVITED",
+      action: "ADMIN_CREATED",
       entity: "Auth",
       resourceId: user.legacyId,
     })
 
-    const inviteUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/admin/activate?token=${inviteToken}`
-
     return sendSuccess(
       res,
       {
-        message: "Admin invitation created successfully.",
+        message: "Google administrator authorized successfully.",
         user: {
           id: user.legacyId,
           name: user.name,
@@ -92,7 +85,6 @@ export async function inviteUser(req: Request, res: Response, next: NextFunction
           role: user.role,
           status: user.status,
         },
-        inviteUrl,
       },
       { status: 201 }
     )
@@ -116,6 +108,7 @@ export async function activateUser(req: Request, res: Response, next: NextFuncti
     }
 
     user.passwordHash = await hashPassword(password)
+    user.authProvider = "LOCAL"
     user.status = "ACTIVE"
     user.isActive = true
     user.inviteToken = undefined

@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { login, logout, me, refresh } from "../controllers/auth.controller.js"
+import { googleLogin, login, logout, me, refresh } from "../controllers/auth.controller.js"
 import { submitApplication } from "../controllers/application.controller.js"
 import { chat } from "../controllers/chat.controller.js"
 import { getCms, getPublicCms, postCms } from "../controllers/cms.controller.js"
@@ -15,7 +15,7 @@ import {
   listServices,
   listTeam,
 } from "../controllers/public.controller.js"
-import { requireAuth } from "../middleware/auth.middleware.js"
+import { optionalAuth, requireAuth } from "../middleware/auth.middleware.js"
 import { requireRole } from "../middleware/role.middleware.js"
 import { authLimiter, chatLimiter, formLimiter, aiGenLimiter } from "../middleware/rateLimit.middleware.js"
 
@@ -87,8 +87,9 @@ apiRouter.post("/webhooks/whatsapp", handleWebhook)
 
 // Authentication Endpoints
 apiRouter.post("/auth/login", authLimiter, login)
+apiRouter.post("/auth/google", authLimiter, googleLogin)
 apiRouter.post("/auth/refresh", authLimiter, refresh)
-apiRouter.post("/auth/logout", requireAuth, logout)
+apiRouter.post("/auth/logout", optionalAuth, logout)
 apiRouter.get("/auth/me", requireAuth, me)
 apiRouter.post("/auth/activate", authLimiter, activateUser)
 apiRouter.post("/auth/forgot-password", authLimiter, forgotPassword)

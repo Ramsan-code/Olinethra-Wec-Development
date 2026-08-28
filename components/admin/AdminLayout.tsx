@@ -70,7 +70,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     fetch("/api/admin/auth/me")
       .then((res) => {
         if (res.status === 401) {
-          router.push("/admin/login")
+          router.push(`/admin/login?next=${encodeURIComponent(pathname)}`)
           return null
         }
         return res.json()
@@ -83,7 +83,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       .catch(() => {
         setLoading(false)
       })
-  }, [router])
+  }, [pathname, router])
 
   const handleLogout = async () => {
     await fetch("/api/admin/auth/logout", { method: "POST" })

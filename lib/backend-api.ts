@@ -25,3 +25,13 @@ export async function proxyJson(response: Response) {
   }
   return proxied
 }
+
+export function forwardSetCookies(source: Response, target: Response) {
+  const getSetCookie = (source.headers as Headers & { getSetCookie?: () => string[] }).getSetCookie
+  const values = getSetCookie ? getSetCookie.call(source.headers) : []
+  for (const value of values) target.headers.append("set-cookie", value)
+  if (!values.length) {
+    const value = source.headers.get("set-cookie")
+    if (value) target.headers.append("set-cookie", value)
+  }
+}

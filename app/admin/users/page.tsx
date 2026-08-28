@@ -16,6 +16,7 @@ interface UserItem {
   role: "Super Admin" | "Content Admin" | "Hiring Admin"
   status: "ACTIVE" | "INVITED" | "DISABLED"
   lastLoginAt?: string
+  authProvider?: "LOCAL" | "GOOGLE"
   createdAt: string
 }
 
@@ -25,13 +26,12 @@ export default function AdminUsersPage() {
   const [error, setError] = React.useState("")
   const [success, setSuccess] = React.useState("")
 
-  // Invite modal state
+  // Authorized admin form state
   const [showInviteModal, setShowInviteModal] = React.useState(false)
   const [inviteName, setInviteName] = React.useState("")
   const [inviteEmail, setInviteEmail] = React.useState("")
   const [inviteRole, setInviteRole] = React.useState<"Super Admin" | "Content Admin" | "Hiring Admin">("Content Admin")
   const [inviting, setInviting] = React.useState(false)
-  const [createdInviteUrl, setCreatedInviteUrl] = React.useState("")
 
   const fetchUsers = React.useCallback(async () => {
     try {
@@ -60,7 +60,6 @@ export default function AdminUsersPage() {
     setInviting(true)
     setError("")
     setSuccess("")
-    setCreatedInviteUrl("")
 
     try {
       const res = await fetch("/api/admin/users", {
@@ -71,18 +70,15 @@ export default function AdminUsersPage() {
 
       const data = await res.json()
       if (res.ok && data.success) {
-        setSuccess(`Admin invitation generated for ${inviteEmail}.`)
-        if (data.data?.inviteUrl) {
-          setCreatedInviteUrl(data.data.inviteUrl)
-        }
+        setSuccess(`${inviteEmail} is now authorized to sign in with Google.`)
         setInviteName("")
         setInviteEmail("")
         fetchUsers()
       } else {
-        setError(data.error?.message || "Failed to invite admin.")
+        setError(data.error?.message || "Failed to authorize admin.")
       }
     } catch {
-      setError("Failed to create admin invitation.")
+      setError("Failed to authorize admin.")
     } finally {
       setInviting(false)
     }
@@ -160,12 +156,11 @@ export default function AdminUsersPage() {
           <Button
             onClick={() => {
               setShowInviteModal(!showInviteModal)
-              setCreatedInviteUrl("")
             }}
             className="bg-neutral-950 text-white hover:bg-neutral-800 dark:bg-neutral-50 dark:text-neutral-950 font-bold text-xs gap-2"
           >
             <UserPlus className="h-4 w-4" />
-            <span>Invite New Admin</span>
+            <span>Add Admin</span>
           </Button>
         </div>
 
@@ -188,7 +183,7 @@ export default function AdminUsersPage() {
           <div className="rounded-2xl border border-neutral-300 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900 shadow-lg space-y-4">
             <div className="flex items-center justify-between border-b border-neutral-200 pb-3 dark:border-neutral-800">
               <h2 className="text-sm font-bold font-mono uppercase tracking-wider text-neutral-950 dark:text-neutral-50">
-                Invite New Administrator
+                Add Google Administrator
               </h2>
               <button
                 onClick={() => setShowInviteModal(false)}
@@ -212,7 +207,7 @@ export default function AdminUsersPage() {
               </div>
 
               <div className="space-y-1">
-                <Label htmlFor="inv-email" className="text-xs font-mono uppercase text-neutral-500">Email Address</Label>
+                <Label htmlFor="inv-email" className="text-xs font-mono uppercase text-neutral-500">Google Email</Label>
                 <Input
                   id="inv-email"
                   type="email"
@@ -244,25 +239,12 @@ export default function AdminUsersPage() {
                   disabled={inviting || !inviteName || !inviteEmail}
                   className="bg-neutral-950 text-white dark:bg-neutral-50 dark:text-neutral-950 font-bold text-xs"
                 >
-                  {inviting ? "Creating Invitation..." : "Send Admin Invitation"}
+                  {inviting ? "Authorizing Admin..." : "Add Admin"}
                 </Button>
               </div>
             </form>
 
-            {createdInviteUrl && (
-              <div className="p-3.5 rounded-xl border border-emerald-500/30 bg-emerald-500/5 space-y-1 text-xs">
-                <p className="font-mono font-bold text-emerald-600 dark:text-emerald-400">
-                  Invitation Link Generated (Expires in 24 Hours):
-                </p>
-                <input
-                  type="text"
-                  readOnly
-                  value={createdInviteUrl}
-                  onClick={(e) => (e.target as HTMLInputElement).select()}
-                  className="w-full font-mono text-[11px] p-2 rounded border border-neutral-300 bg-white text-neutral-900 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-200"
-                />
-              </div>
-            )}
+            <p className="text-xs text-neutral-500">The administrator must sign in using this Google account.</p>
           </div>
         )}
 
@@ -279,7 +261,7 @@ export default function AdminUsersPage() {
                   <tr>
                     <th className="px-6 py-3.5">Administrator</th>
                     <th className="px-6 py-3.5">Role</th>
-                    <th className="px-6 py-3.5">Status</th>
+                    <th className="px-6 py-3.5">Status / Provider</th>
                     <th className="px-6 py-3.5">Last Login</th>
                     <th className="px-6 py-3.5 text-right">Actions</th>
                   </tr>
@@ -321,6 +303,7 @@ export default function AdminUsersPage() {
                             <span>DISABLED</span>
                           </span>
                         )}
+                        <div className="mt-1 text-[10px] text-neutral-500">{u.authProvider || "LOCAL"}</div>
                       </td>
                       <td className="px-6 py-4 text-neutral-500 text-[11px]">
                         {u.lastLoginAt ? new Date(u.lastLoginAt).toLocaleString() : "Never"}
