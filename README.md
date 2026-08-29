@@ -2,6 +2,8 @@
 
 An engineering-first web studio platform built with Next.js 16 (App Router), TypeScript, and Tailwind CSS.
 
+See the [complete technical documentation](docs/README.md) for architecture, API inventory, models, security, operations, reports and audited implementation gaps.
+
 ## Environment Setup
 
 Copy `.env.example` to `.env.local` and configure the required environment variables before starting the application:
